@@ -2413,7 +2413,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     margin-right: .8rem;
 }
 
-.post-list-nav a[rel="prev"], .post-list-nav a[rel="next"] {
+.post-list-nav a.prev, .post-list-nav a.next {
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
     font-size: 1.422rem;
@@ -2425,11 +2425,11 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     padding: 1.2rem 2rem;
     border-radius: 4px;
 }
-
-.post-list-nav a[rel="prev"]:hover, 
-.post-list-nav a[rel="prev"]:focus, 
-.post-list-nav a[rel="next"]:hover, 
-.post-list-nav a[rel="next"]:focus {
+[rel="next"] -> .next
+.post-list-nav a.prev:hover, 
+.post-list-nav a.prev:focus, 
+.post-list-nav a.next:hover, 
+.post-list-nav a.next:focus {
     color: #ffffff;
     background-color: #9fcc7f;
 }

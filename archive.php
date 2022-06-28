@@ -6,10 +6,10 @@
 
             <div id="main" class="s-content__main large-8 column">
 
-                <?php if (have_posts()): ?>
+				<?php if ( have_posts() ): ?>
 
-                    <?php while (have_posts()): ?>
-                        <?php the_post(); ?>
+					<?php while ( have_posts() ): ?>
+						<?php the_post(); ?>
 
                         <article class="entry">
 
@@ -17,23 +17,23 @@
 
                                 <h2 class="entry__title h1">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-                                        <?php the_title(); ?>
+										<?php the_title(); ?>
                                     </a>
                                 </h2>
 
                                 <div class="entry__meta">
                                     <ul>
                                         <li><?php the_time(); ?></li>
-                                        <?php
-                                        $categories = get_the_category();
-                                        ?>
-            <?php foreach ($categories as $category): ?>
-                <li>
-                    <a href="<?php echo get_term_link($category); ?>">
-                        <?php echo $category->name; ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
+										<?php
+										$categories = get_the_category();
+										?>
+										<?php foreach ( $categories as $category ): ?>
+                                            <li>
+                                                <a href="<?php echo get_term_link( $category ); ?>">
+													<?php echo $category->name; ?>
+                                                </a>
+                                            </li>
+										<?php endforeach; ?>
 
                                         <li><?php the_author(); ?></li>
                                     </ul>
@@ -42,31 +42,27 @@
                             </header>
 
                             <div class="entry__content">
-                                <?php the_excerpt(); ?>
+								<?php the_excerpt(); ?>
                             </div>
 
                         </article> <!-- end entry -->
 
-                    <?php endwhile; ?>
+					<?php endwhile; ?>
 
                     <!-- page nav -->
-                <?php the_posts_pagination(); ?>
+					<?php the_posts_pagination(); ?>
 
-                    <div class="post-list-nav">
-                        <a rel="prev" href="#0">Prev</a>
-                        <a rel="next" href="#0">Next</a>
-                    </div>
-
-                <?php else: ?>
+				<?php else: ?>
 
                     <p>Нет записей</p>
 
-                <?php endif; ?>
+				<?php endif; ?>
 
             </div> <!-- end main -->
 
 
             <div id="sidebar" class="s-content__sidebar large-4 column">
+                <?php get_sidebar(); ?>
 
                 <div class="widget widget--search">
                     <h3 class="h6">Search</h3>

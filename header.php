@@ -20,8 +20,7 @@
 
     <!-- script
     ================================================== -->
-    <script src="<?= get_template_directory_uri(); ?>/js/modernizr.js"></script>
-    <script defer src="<?= get_template_directory_uri(); ?>/js/fontawesome/all.min.js"></script>
+    <?php wp_head(); ?>
 
     <!-- favicons
     ================================================== -->
@@ -52,7 +51,7 @@
 
         <div class="s-header__content column">
             <h1 class="s-header__logotext">
-                <a href="<?= get_template_directory_uri(); ?>/index.html" title="">Keep It Simple.</a>
+                <a href="<?= get_template_directory_uri(); ?>/index.html" title=""><?php do_action('my_action'); ?></a>
             </h1>
             <p class="s-header__tagline">Put your awesome tagline here.</p>
         </div>
