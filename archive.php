@@ -34,7 +34,7 @@
                 <nav class="col full pagination">
                     <?php the_posts_pagination(); ?>
                 </nav>
-                    <?php esle: ?>
+                    <?php else: ?>
                     <p>Нет записей</p>
                 <?php endif; ?>
 
