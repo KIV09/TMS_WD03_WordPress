@@ -13,15 +13,6 @@
                 "depth" => 1,
             ]); ?>
 
-<!--            <ul class="footer-nav">-->
-<!--                <li><a href="#">Home.</a></li>-->
-<!--                <li><a href="#">Blog.</a></li>-->
-<!--                <li><a href="#">Portfolio.</a></li>-->
-<!--                <li><a href="#">About.</a></li>-->
-<!--                <li><a href="#">Contact.</a></li>-->
-<!--                <li><a href="#">Features.</a></li>-->
-<!--            </ul>-->
-
             <ul class="footer-social">
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -46,13 +37,7 @@
 
 <!-- Java Script
 ================================================== -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= get_template_directory_uri(); ?>/assetsjs/jquery-1.10.2.min.js"><\/script>')</script>
-<script type="text/javascript" src="<?= get_template_directory_uri(); ?>/assetsjs/jquery-migrate-1.2.1.min.js"></script>
-
-<script src="<?= get_template_directory_uri(); ?>/assetsjs/jquery.flexslider.js"></script>
-<script src="<?= get_template_directory_uri(); ?>/assetsjs/doubletaptogo.js"></script>
-<script src="<?= get_template_directory_uri(); ?>/assetsjs/init.js"></script>
+        <?php wp_footer(); ?>
 
 </body>
 
