@@ -17,13 +17,14 @@
 
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/default.css">
-    <link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/layout.css">
-    <link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/media-queries.css">
+    <?php wp_head(); ?>
+    <!--<link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/default.css">-->
+    <!--<link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/layout.css">-->
+    <!--<link rel="stylesheet" href="<?= get_template_directory_uri();?>/assets/css/media-queries.css">-->
 
     <!-- Script
     ================================================== -->
-    <script src="<?= get_template_directory_uri();?>/assets/js/modernizr.js"></script>
+   <!-- <script src="<?= get_template_directory_uri();?>/assets/js/modernizr.js"></script> -->
 
     <!-- Favicons
      ================================================== -->
