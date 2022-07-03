@@ -4,7 +4,7 @@ add_action('after_setup_theme', 'theme_setup');
 function theme_setup()
 {
     add_theme_support('post-thumbnails');
-    add_image_size('article_image', width: 500,height: 500,crop: 300);
+    add_image_size('article_image', width: 500, height: 500, crop: 300);
 
     register_nav_menu('top', 'Главное меню');
     register_nav_menu('bottom', 'Футер меню');
@@ -44,8 +44,8 @@ add_action('wp_enqueue_scripts', 'scriptEnqueued');
 function scriptEnqueued()
 {
     wp_deregister_script('jquery');
-    wp_register_script('dz-jquery',get_template_directory_uri() . '/assets/js/jquery-1.10.2.min.js', '[]', '111', 'true');
-    wp_register_script('dz-jquery-migrate',get_template_directory_uri() . '/assets/js/jquery-migrate-1.2.1.min.js', '[]', '111', 'true');
+    wp_register_script('dz-jquery', get_template_directory_uri() . '/assets/js/jquery-1.10.2.min.js', '[]', '111', 'true');
+    wp_register_script('dz-jquery-migrate', get_template_directory_uri() . '/assets/js/jquery-migrate-1.2.1.min.js', '[]', '111', 'true');
     wp_enqueue_script('dz-jquery');
     wp_enqueue_script('dz-jquery-migrate');
 
@@ -74,4 +74,66 @@ function registerWidgetsArea()
         'before_title' => '<h3 class="h6">',
         'after_title' => '</h3>',
     ]);
+}
+
+add_filter('comments_number', 'commentNumber');
+function commentNumber($numder) {
+    $comment = 'комментари';
+    if ($numder % 100 >= 1 && $numder % 100 <= 4) {
+        if ($numder % 10 == 1) {
+            $comment .= 'й';
+        } else {
+            $comment .= 'я';
+        }
+    } else {
+        $comment .= 'ев';
+    }
+    return $numder;
+}
+
+function dzComment($comment, $args, $depth)
+{
+    ?>
+    <li class="thread-alt depth-<?= $depth; ?>">
+
+    <div class="avatar">
+        <?= get_avatar($comment, size: 120); ?>
+    </div>
+
+    <div class="comment-info">
+        <cite><?= get_comment_author(); ?></cite>
+
+            <?php if (!$comment->comment_approved): ?>
+                <div class="not-approved">Комментарий не подтвержден!</div>
+            <?php endif; ?>
+
+            <div class="comment-meta">
+                <time class="comment-time" datetime=" "><?= get_comment_date(); ?></time>
+                <?php
+                comment_reply_link(array_merge($args, [
+                    'depth' => $depth,
+                    'max_depth' => $args['max_depth']
+                ]));
+                ?>
+            </div>
+    </div>
+    <div class="comment-text">
+        <?php comment_text(); ?>
+    </div>
+    <?php if ($comment->children): ?>
+    <ul class="children">
+<?php endif; ?>
+    <?php
+
+}
+
+function dzCommentEnd($comment, $args, $depth)
+{
+    ?>
+    <?php if ($comment->children): ?>
+    </ul>
+    </li>
+<?php endif; ?>
+    <?php
+
 }
