@@ -15,6 +15,7 @@
 
                             <header class="entry__header">
 
+                                <?php the_post_thumbnail('article_image'); ?>
                                 <h2 class="entry__title h1">
                                     <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 										<?php the_title(); ?>
@@ -23,7 +24,7 @@
 
                                 <div class="entry__meta">
                                     <ul>
-                                        <li><?php the_time(); ?></li>
+                                        <li><?php the_time('d.m.Y'); ?></li>
 										<?php
 										$categories = get_the_category();
 										?>

@@ -1,7 +1,11 @@
 <?php
-add_action( 'after_setup_theme', 'theme_register_nav_menu' );
+add_action( 'after_setup_theme', 'theme_setup' );
 
-function theme_register_nav_menu() {
+function theme_setup() {
+	add_theme_support('post-thumbnails');
+
+	add_image_size('article_image', 500, 300, ['left', 'top']);
+
 	register_nav_menu( 'top', 'Главное меню' );
 	register_nav_menu( 'bottom', 'Меню в футере' );
 }
@@ -42,9 +46,18 @@ function myFunction() {
 
 add_action( 'wp_enqueue_scripts', 'scriptEnqueued' );
 function scriptEnqueued() {
+	wp_deregister_script('jquery');
+	wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.2.1.min.js', [], 111, true );
+	wp_enqueue_script('jquery');
+
+
+	wp_enqueue_script( 'new_theme-jquery-migrate', get_template_directory_uri() . '/js/jquery-migrate-1.2.1.min.js', ['jquery']);
+
+
+
 	wp_enqueue_script( 'new_theme-modernizr', get_template_directory_uri() . '/js/modernizr.js', [], 111, false );
 	wp_enqueue_script( 'new_theme-all', get_template_directory_uri() . '/js/fontawesome/all.min.js', [], 111, false );
-	wp_enqueue_script( 'new_theme-jquery', get_template_directory_uri() . '/js/jquery-3.2.1.min.js', [], 111, true );
+
 	wp_enqueue_script( 'new_theme-main', get_template_directory_uri() . '/js/main.js', [], 111, true );
 
 	wp_enqueue_style( 'new_theme-base', get_template_directory_uri() . '/css/base.css' );
@@ -63,4 +76,83 @@ function registerWidgetsArea() {
 		'before_title' => '<h3 class="h6">',
 		'after_title' => '</h3>',
 	]);
+	register_sidebar([
+		'name' => 'Контакты',
+		'id' => 'contact-sidebar',
+		'before_widget' => '<div class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="h6">',
+		'after_title' => '</h3>',
+	]);
+}
+
+
+add_filter('get_comments_number', 'commentNumber');
+function commentNumber($number) {
+	$comment = 'комментари';
+	if ($number % 100 >= 1 && $number % 100 <= 4) {
+		if ($number % 10 == 1) {
+			$comment .= 'й';
+		} else {
+			$comment .= 'я';
+		}
+	} else {
+		$comment .= 'ев';
+	}
+
+	return $number . ' ' . $comment;
+}
+
+function newThemeComment($comment, $args, $depth) {
+
+?>
+	<li class="thread-alt depth-<?= $depth; ?> comment">
+
+		<div class="comment__avatar">
+			<?= get_avatar($comment, 120); ?>
+		</div>
+
+		<div class="comment__content">
+
+			<div class="comment__info">
+				<div class="comment__author"><?= get_comment_author(); ?></div>
+
+                <?php if (!$comment->comment_approved): ?>
+                    <div class="not-approved">Комментарий не подтвержден.</div>
+                <?php endif; ?>
+
+				<div class="comment__meta">
+					<div class="comment__time"><?= get_comment_date(); ?></div>
+					<div class="comment__reply">
+						<?php
+                        comment_reply_link(array_merge($args, [
+                            'depth' => $depth,
+                            'max_depth' => $args['max_depth']
+                        ]));
+                        ?>
+					</div>
+				</div>
+			</div>
+
+			<div class="comment__text">
+				<?php comment_text(); ?>
+			</div>
+
+		</div>
+
+		<?php if ($comment->children): ?>
+			<ul class="children">
+		<?php endif; ?>
+
+	<?php
+}
+
+function newThemeCommentEnd($comment, $args, $depth) {
+	?>
+	<?php if ($comment->children): ?>
+		</ul>
+	<?php endif; ?>
+
+	</li>
+	<?
 }

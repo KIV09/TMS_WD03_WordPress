@@ -70,7 +70,7 @@
 
             <div id="sidebar" class="s-content__sidebar large-4 column">
 
-				<?php get_sidebar(); ?>
+				<?php get_sidebar('contact'); ?>
 
             </div> <!-- end sidebar -->
 
