@@ -12,7 +12,7 @@
                     <div class="entry-header cf">
                         <h1><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h1>
                         <p class="post-meta">
-                            <time class="date" ><?php the_time(); ?></time>
+                            <time class="date" ><?php the_date(); ?></time>
                             <span class="categories">
                                 <?php $categories = get_the_category() ?>
                                     <?php foreach ($categories as $category): ?>
@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="post-thumb">
-                        <a href="<?php the_permalink(); ?>" title=""><img src="<?= get_template_directory_uri(); ?>/assets/images/post-image/post-image-1300x500-01.jpg" alt="post-image" title="post-image"></a>
+                        <a href="<?php the_permalink(); ?>" title=""><?php the_post_thumbnail(); ?></a>
                     </div>
                     <div class="post-content">
                         <?php the_excerpt(); ?>
@@ -41,65 +41,66 @@
             </div> <!-- Primary End-->
 
             <div id="secondary" class="four columns end">
+                <?php get_sidebar(); ?>
 
-                <aside id="sidebar">
-
-                    <div class="widget widget_search">
-                        <h5>Search</h5>
-                        <form action="#">
-
-                            <input class="text-search" type="text" onfocus="if (this.value == 'Search here...') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Search here...'; }" value="Search here...">
-                            <input type="submit" class="submit-search" value="">
-
-                        </form>
-                    </div>
-
-                    <div class="widget widget_text">
-                        <h5 class="widget-title">Text Widget</h5>
-                        <div class="textwidget">Proin gravida nibh vel velit auctor aliquet.
-                            Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum,
-                            nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus
-                            a sit amet mauris. Morbi accumsan ipsum velit. </div>
-                    </div>
-
-                    <div class="widget widget_categories">
-                        <h5 class="widget-title">Categories</h5>
-                        <ul class="link-list cf">
-                            <li><a href="#">Designs</a></li>
-                            <li><a href="#">Internet</a></li>
-                            <li><a href="#">Typography</a></li>
-                            <li><a href="#">Photography</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Other Stuff</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="widget widget_tag_cloud">
-                        <h5 class="widget-title">Tags</h5>
-                        <div class="tagcloud cf">
-                            <a href="#">drupal</a>
-                            <a href="#">joomla</a>
-                            <a href="#">ghost</a>
-                            <a href="#">wordpress</a>
-                        </div>
-                    </div>
-
-                    <div class="widget widget_photostream">
-                        <h5>Photostream</h5>
-                        <ul class="photostream cf">
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                            <li><a href="#"><img src="<?= get_template_directory_uri(); ?>/assets/images/thumb.jpg" alt="thumbnail"></a></li>
-                        </ul>
-                    </div>
-
-                </aside>
+<!--                <aside id="sidebar">-->
+<!---->
+<!--                    <div class="widget widget_search">-->
+<!--                        <h5>Search</h5>-->
+<!--                        <form action="#">-->
+<!---->
+<!--                            <input class="text-search" type="text" onfocus="if (this.value == 'Search here...') { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Search here...'; }" value="Search here...">-->
+<!--                            <input type="submit" class="submit-search" value="">-->
+<!---->
+<!--                        </form>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="widget widget_text">-->
+<!--                        <h5 class="widget-title">Text Widget</h5>-->
+<!--                        <div class="textwidget">Proin gravida nibh vel velit auctor aliquet.-->
+<!--                            Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum,-->
+<!--                            nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus-->
+<!--                            a sit amet mauris. Morbi accumsan ipsum velit. </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="widget widget_categories">-->
+<!--                        <h5 class="widget-title">Categories</h5>-->
+<!--                        <ul class="link-list cf">-->
+<!--                            <li><a href="#">Designs</a></li>-->
+<!--                            <li><a href="#">Internet</a></li>-->
+<!--                            <li><a href="#">Typography</a></li>-->
+<!--                            <li><a href="#">Photography</a></li>-->
+<!--                            <li><a href="#">Web Development</a></li>-->
+<!--                            <li><a href="#">Projects</a></li>-->
+<!--                            <li><a href="#">Other Stuff</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="widget widget_tag_cloud">-->
+<!--                        <h5 class="widget-title">Tags</h5>-->
+<!--                        <div class="tagcloud cf">-->
+<!--                            <a href="#">drupal</a>-->
+<!--                            <a href="#">joomla</a>-->
+<!--                            <a href="#">ghost</a>-->
+<!--                            <a href="#">wordpress</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="widget widget_photostream">-->
+<!--                        <h5>Photostream</h5>-->
+<!--                        <ul class="photostream cf">-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                            <li><a href="#"><img src="--><?//= get_template_directory_uri(); ?><!--/assets/images/thumb.jpg" alt="thumbnail"></a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!---->
+<!--                </aside>-->
 
             </div> <!-- Secondary End-->
 

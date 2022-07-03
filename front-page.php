@@ -1,4 +1,4 @@
-<?php get_header();?>
+<?php get_header(); ?>
     <!-- Intro Section
   ================================================== -->
     <section id="intro">
@@ -14,12 +14,15 @@
                         <div class="twelve columns">
                             <div class="slider-text">
                                 <h1>Free amazing site template<span>.</span></h1>
-                                <p>Aenean condimentum, lacus sit amet luctus lobortis, dolores et quas molestias excepturi
-                                    enim tellus ultrices elit, amet consequat enim elit noneas sit amet luctu. lacus sit amet luctus lobortis, dolores et quas molestias excepturi
+                                <p>Aenean condimentum, lacus sit amet luctus lobortis, dolores et quas molestias
+                                    excepturi
+                                    enim tellus ultrices elit, amet consequat enim elit noneas sit amet luctu. lacus sit
+                                    amet luctus lobortis, dolores et quas molestias excepturi
                                     enim tellus ultrices elit.</p>
                             </div>
                             <div class="slider-image">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-01.png" alt="" />
+                                <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-01.png"
+                                     alt=""/>
                             </div>
                         </div>
                     </div>
@@ -31,12 +34,15 @@
                         <div class="twelve columns">
                             <div class="slider-text">
                                 <h1>Responsive + HTML5 + CSS3<span>.</span></h1>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                                    deleniti eos et accusamus. amet consequat enim elit noneas sit amet luctu. lacus sit amet luctus lobortis.
+                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                                    voluptatum
+                                    deleniti eos et accusamus. amet consequat enim elit noneas sit amet luctu. lacus sit
+                                    amet luctus lobortis.
                                     Aenean condimentum, lacus sit amet luctus.</p>
                             </div>
                             <div class="slider-image">
-                                <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-02.png" alt="" />
+                                <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-02.png"
+                                     alt=""/>
                             </div>
                         </div>
                     </div>
@@ -109,7 +115,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
                         <a href="portfolio.html">
-                            <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/geometrics.jpg">
+                            <img alt=""
+                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/geometrics.jpg">
                             <div class="overlay"></div>
                             <div class="link-icon"><i class="fa fa-link"></i></div>
                         </a>
@@ -137,7 +144,8 @@
                 <div class="columns portfolio-item s-first">
                     <div class="item-wrap">
                         <a href="portfolio.html">
-                            <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/camera-man.jpg">
+                            <img alt=""
+                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/camera-man.jpg">
                             <div class="overlay"></div>
                             <div class="link-icon"><i class="fa fa-link"></i></div>
                         </a>
@@ -151,7 +159,8 @@
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
                         <a href="portfolio.html">
-                            <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/into-the-light.jpg">
+                            <img alt=""
+                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/into-the-light.jpg">
                             <div class="overlay"></div>
                             <div class="link-icon"><i class="fa fa-link"></i></div>
                         </a>
@@ -179,99 +188,40 @@
         </div>
 
         <div class="blog-entries">
+            <?php $posts = get_posts(args: [
+                'numberposts' => 3,
+            ]
+            );
+            ?>
 
-            <!-- Entry -->
-            <article class="row entry">
+            <?php foreach ($posts as $post): ?>
+                <?php setup_postdata($post); ?>
+                <!-- Entry -->
+                <article class="row entry">
 
-                <div class="entry-header">
+                    <div class="entry-header">
+                        <div class="ten columns entry-title pull-right">
+                            <?php the_post_thumbnail(); ?>
+                            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                        </div>
 
-                    <div class="permalink">
-                        <a href="single.html"><i class="fa fa-link"></i></a>
+                        <div class="two columns post-meta end">
+                            <p>
+                                <time datetime="2014-01-31" class="post-date" pubdate=""><?php the_date(); ?></time>
+                                <span class="dauthor"><?php the_author(); ?></span>
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="single.html">Proin gravida nibh vel velit auctor aliquet Aenean sollicitudin auctor.</a></h3>
+                    <div class="ten columns offset-2 post-content">
+                        <?php the_excerpt(); ?>
                     </div>
 
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-31" class="post-date" pubdate="">Jan 31, 2014</time>
-                            <span class="dauthor">By Sakura Haruno</span>
-                        </p>
-                    </div>
+                </article> <!-- Entry End -->
+            <?php endforeach; ?>
+            <?php wp_reset_postdata(); ?>
 
-                </div>
-
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.html">Read More<i class="fa fa-arrow-circle-o-right"></i></a></p>
-                </div>
-
-            </article> <!-- Entry End -->
-
-            <!-- Entry -->
-            <article class="row entry">
-
-                <div class="entry-header">
-
-                    <div class="permalink">
-                        <a href="single.html"><i class="fa fa-link"></i></a>
-                    </div>
-
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="single.html">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed.</a></h3>
-                    </div>
-
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-29" class="post-date" pubdate="">Jan 30, 2014</time>
-                            <span class="dauthor">By John Doe</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.html">Read More<i class="fa fa-arrow-circle-o-right"></i></a></p>
-                </div>
-
-            </article> <!-- Entry End -->
-
-            <!-- Entry -->
-            <article class="row entry">
-
-                <div class="entry-header">
-
-                    <div class="permalink">
-                        <a href="single.html"><i class="fa fa-link"></i></a>
-                    </div>
-
-                    <div class="ten columns entry-title pull-right">
-                        <h3><a href="blog-single.html">Quis autem vel esse eum iure reprehenderit qui in ea voluptate velit esse.</a></h3>
-                    </div>
-
-                    <div class="two columns post-meta end">
-                        <p>
-                            <time datetime="2014-01-28" class="post-date" pubdate="">Jan 28, 2014</time>
-                            <span class="dauthor">By Naruto Uzumaki</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="ten columns offset-2 post-content">
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
-                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                        <a class="more-link" href="single.html">Read More<i class="fa fa-arrow-circle-o-right"></i></a></p>
-                </div>
-
-            </article> <!-- Entry End -->
 
         </div> <!-- Entries End -->
 
@@ -286,7 +236,8 @@
             <div class="eight columns offset-1">
 
                 <h1><a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Host This Template on Dreamhost.</a></h1>
-                <p>Looking for an awesome and reliable webhosting? Try <a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
+                <p>Looking for an awesome and reliable webhosting? Try <a
+                            href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
                     Get <span>$50 off</span> when you sign up with the promocode <span>STYLESHOUT</span>.
                     <!-- Simply type	the promocode in the box labeled “Promo Code” when placing your order. --></p>
 
