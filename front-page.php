@@ -176,7 +176,6 @@
     <div class="row">
         <div class="twelve columns align-center">
             <h1>Our latest posts and rants.</h1>
-            <?php get_sidebar(); ?>
         </div>
     </div>
 
@@ -202,7 +201,7 @@
 
                     <div class="two columns post-meta end">
                         <p>
-                            <time datetime="2014-01-31" class="post-date" pubdate=""><?php the_time(); ?></time>
+                            <time datetime="2014-01-31" class="post-date" pubdate=""><?= get_the_date(); ?></time>
                             <span class="dauthor"><?php the_author(); ?></span>
                         </p>
                     </div>
@@ -210,6 +209,13 @@
                 </div>
 
                 <div class="ten columns offset-2 post-content">
+                    <div class="post-thumb">
+                        <?php if (has_post_thumbnail()): ?>
+                            <div class="entry__content-media">
+                                <?php the_post_thumbnail("list_image"); ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     <?php the_excerpt(); ?>
                 </div>
 

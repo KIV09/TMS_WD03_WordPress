@@ -5,7 +5,6 @@
 <div class="content-outer">
 
     <div id="page-content" class="row">
-        <?php get_sidebar(); ?>
         <div id="primary" class="eight columns">
             <?php if (have_posts()): ?>
             <?php while (have_posts()): ?>
@@ -15,7 +14,7 @@
                 <div class="entry-header cf">
                     <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
                     <p class="post-meta">
-                        <time class="date" datetime="2014-01-14T11:24"><?php the_time(); ?></time>
+                        <time class="date" datetime="2014-01-14T11:24"><?= get_the_date(); ?></time>
                         /
                         <span class="categories">
                                 <?php $categories = get_the_category() ?>
@@ -27,7 +26,11 @@
                 </div>
 
                 <div class="post-thumb">
-                    <img src="<?= get_template_directory_uri(); ?>/assets/images/post-image/post-image-1300x500-01.jpg" alt="post-image" title="post-image">
+                    <?php if (has_post_thumbnail()): ?>
+                        <div class="entry__content-media">
+                            <?php the_post_thumbnail("list_image"); ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="post-content">
@@ -35,8 +38,7 @@
                     <p class="lead"><?php the_excerpt(); ?></p>
 
                     <p class="tags">
-                        <span>Tagged in </span>:
-                        <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a>
+                        <?php the_tags("<span>Tagged in </span>:", ", ");?>
                     </p>
 
 <!--                    <div class="bio cf">-->

@@ -1,7 +1,12 @@
 <?php
-add_action('after_setup_theme', 'theme_register_nav_menu');
-function theme_register_nav_menu()
+add_action('after_setup_theme', 'theme_setup');
+function theme_setup()
 {
+    add_theme_support( 'post-thumbnails' );
+
+    add_image_size("article_image", 1300, 500, ["center", "center"]);
+    add_image_size("list_image", 650, 300, ["center", "center"]);
+
     register_nav_menu('top', 'Header menu');
     register_nav_menu('bottom', 'Footer menu');
 }
@@ -18,6 +23,11 @@ function exceptMore($more)
 add_action("wp_enqueue_scripts", "scriptEnqueued");
 function scriptEnqueued($handle)
 {
+    wp_deregister_script('jquery');
+    wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.2.1.min.js', [], 111, true );
+    wp_enqueue_script('jquery');
+
+
     wp_enqueue_script("dz-modernizr",
         get_template_directory_uri() . "/assets/js/modernizr.js");
 
@@ -50,6 +60,14 @@ function registerWidgetsArea()
             'before_title' => '<h3 class="h6">',
             'after_title' => '</h3>',]
     );
+    register_sidebar([
+        'name' => 'Контакты тема dz',
+        'id' => 'contact-sidebar',
+        'before_widget' => '<div class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="h6">',
+        'after_title' => '</h3>',
+    ]);
 }
 
 add_filter('navigation_markup_template', 'my_navigation_template', 10, 2 );
@@ -75,4 +93,14 @@ function LinksOutput($html)
     }
     return $html;
 }
+
+//add_filter("get_comments_number", "commentNumber");
+//function commentNumber($number) {
+//    $comment = ' Comment';
+//    if ($number > 2) {
+//            $comment .= 's';
+//        }
+//    return $number . $comment;
+//}
+
 
