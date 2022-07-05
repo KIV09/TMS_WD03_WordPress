@@ -47,7 +47,7 @@ Template Name: Page Contacts
                 <div id="contact-form">
 
                     <!-- form -->
-                    <form name="contactForm" id="contactForm" method="post" action="">
+                    <form name="contactForm" id="contactForm" method="post" action="<?= get_template_directory_uri(); ?>/assets/inc/sendEmail.php">
                         <fieldset>
 
                             <div class="half">
@@ -73,7 +73,7 @@ Template Name: Page Contacts
                             <div>
                                 <button class="submit">Submit</button>
                                 <span id="image-loader">
-                              <img src="images/loader.gif" alt="" />
+                              <img src="<?= get_template_directory_uri(); ?>/assets/images/loader.gif" alt="" />
                            </span>
                             </div>
 

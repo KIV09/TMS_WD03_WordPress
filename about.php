@@ -50,7 +50,7 @@ Template Name: Page About
 
                         <div class="column member">
 
-                            <img src="images/team/team-img-01.jpg" alt=""/>
+                            <img src="<?= get_template_directory_uri(); ?>/assets/images/team/team-img-01.jpg" alt=""/>
 
                             <div class"member-name">
                             <h5>Naruto Uzumaki</h5>
@@ -72,7 +72,7 @@ Template Name: Page About
 
                     <div class="column member">
 
-                        <img src="images/team/team-img-02.jpg" alt=""/>
+                        <img src="<?= get_template_directory_uri(); ?>/assets/images/team/team-img-02.jpg" alt=""/>
 
                         <div class"member-name">
                         <h5>Sakura Haruno</h5>
@@ -94,7 +94,7 @@ Template Name: Page About
 
                 <div class="column member">
 
-                    <img src="images/team/team-img-03.jpg" alt=""/>
+                    <img src="<?= get_template_directory_uri(); ?>/assets/images/team/team-img-03.jpg" alt=""/>
 
                     <div class"member-name">
                     <h5>Sasuke Uchiha</h5>
@@ -116,7 +116,7 @@ Template Name: Page About
 
         <div class="column member">
 
-            <img src="images/team/team-img-03.jpg" alt=""/>
+            <img src="<?= get_template_directory_uri(); ?>/assets/images/team/team-img-03.jpg" alt=""/>
 
             <div class"member-name">
             <h5>Shikamaru Nara</h5>
