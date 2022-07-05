@@ -94,13 +94,67 @@ function LinksOutput($html)
     return $html;
 }
 
-//add_filter("get_comments_number", "commentNumber");
-//function commentNumber($number) {
-//    $comment = ' Comment';
-//    if ($number > 2) {
-//            $comment .= 's';
-//        }
-//    return $number . $comment;
-//}
+add_filter("get_comments_number", "commentNumber");
+function commentNumber($number) {
+    $comment = ' Comment';
+    if ($number > 2) {
+            $comment .= 's';
+        }
+    echo $number . $comment;
+}
+
+function newThemeComment($comment, $args, $depth) {
+
+    ?>
+    <li class="thread-alt depth-<?= $depth; ?> comment">
+
+    <div class="avatar">
+        <?= get_avatar($comment, 120); ?>
+    </div>
+
+    <div class="comment__content">
+
+        <div class="comment-info">
+            <div class="comment__author"><?= get_comment_author(); ?></div>
+
+            <?php if (!$comment->comment_approved): ?>
+                <div class="not-approved">Комментарий не подтвержден.</div>
+            <?php endif; ?>
+
+            <div class="comment-meta">
+                <div class="comment-time"><?= get_comment_date(); ?></div>
+                <div class="sep">
+                    <?php
+                    comment_reply_link(array_merge($args, [
+                        'depth' => $depth,
+                        'max_depth' => $args['max_depth']
+                    ]));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="comment__text">
+            <?php comment_text(); ?>
+        </div>
+
+    </div>
+
+    <?php if ($comment->children): ?>
+        <ul class="children">
+    <?php endif; ?>
+
+    <?php
+}
+
+function newThemeCommentEnd($comment, $args, $depth) {
+    ?>
+    <?php if ($comment->children): ?>
+        </ul>
+    <?php endif; ?>
+
+    </li>
+    <?
+}
 
 
