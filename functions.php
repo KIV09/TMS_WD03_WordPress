@@ -76,20 +76,20 @@ function registerWidgetsArea()
     ]);
 }
 
-add_filter('comments_number', 'commentNumber');
-function commentNumber($numder) {
-    $comment = 'комментари';
-    if ($numder % 100 >= 1 && $numder % 100 <= 4) {
-        if ($numder % 10 == 1) {
-            $comment .= 'й';
-        } else {
-            $comment .= 'я';
-        }
-    } else {
-        $comment .= 'ев';
-    }
-    return $numder;
-}
+//add_filter('comments_number', 'commentNumber');
+//function commentNumber($numder) {
+//    $comment = 'комментари';
+//    if ($numder % 100 >= 1 && $numder % 100 <= 4) {
+//        if ($numder % 10 == 1) {
+//            $comment .= 'й';
+//        } else {
+//            $comment .= 'я';
+//        }
+//    } else {
+//        $comment .= 'ев';
+//    }
+//    return $numder;
+//}
 
 function dzComment($comment, $args, $depth)
 {
@@ -132,8 +132,8 @@ function dzCommentEnd($comment, $args, $depth)
     ?>
     <?php if ($comment->children): ?>
     </ul>
-    </li>
 <?php endif; ?>
+    </li>
     <?php
 
 }
