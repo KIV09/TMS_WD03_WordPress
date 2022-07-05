@@ -64,5 +64,5 @@ add_filter('excerpt_more', 'excerptMore');
 function excerptMore($more)
 {
     global $post;
-    return '<a href="' . get_permalink($post->ID) . '">Читать далее</a>';
+    return '<a href="' . get_permalink($post->ID) . '"> Read More</a>';
 }

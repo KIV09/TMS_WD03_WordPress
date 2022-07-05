@@ -189,40 +189,49 @@
     </div>
 
     <div class="blog-entries">
+        <?php $posts = get_posts([
+            'numberposts' => 3,
+        ]); ?>
+        <?php foreach ($posts
 
+        as $post): ?>
+        <?php setup_postdata($post); ?>
         <!-- Entry -->
         <article class="row entry">
 
             <div class="entry-header">
 
                 <div class="permalink">
-                    <a href="<?= get_template_directory_uri(); ?>/single.html"><i class="fa fa-link"></i></a>
+                    <a href="<?php the_permalink(); ?>"><i class="fa fa-link"></i></a>
                 </div>
 
                 <div class="ten columns entry-title pull-right">
-                    <h3><a href="<?= get_template_directory_uri(); ?>/single.html">Proin gravida nibh vel velit auctor
-                            aliquet Aenean sollicitudin auctor.</a></h3>
+                    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                 </div>
 
                 <div class="two columns post-meta end">
                     <p>
-                        <time datetime="2014-01-31" class="post-date" pubdate="">Jan 31, 2014</time>
-                        <span class="dauthor">By Sakura Haruno</span>
+                        <time datetime="2014-01-31" class="post-date" pubdate=""><?php the_time('j F Y'); ?></time>
+                        <span class="dauthor"><?php the_author(); ?></span>
                     </p>
                 </div>
 
             </div>
 
             <div class="ten columns offset-2 post-content">
+                <!--
                 <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
                     deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
                     <a class="more-link" href="<?= get_template_directory_uri(); ?>/single.html">Read More<i
                             class="fa fa-arrow-circle-o-right"></i></a></p>
+                            -->
+                <?php the_excerpt(); ?>
             </div>
 
         </article> <!-- Entry End -->
-
+        <?php endforeach; ?>
+        <?php wp_reset_postdata(); ?>
         <!-- Entry -->
         <article class="row entry">
 

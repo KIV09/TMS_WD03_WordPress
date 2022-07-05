@@ -15,13 +15,7 @@ Template Name: Страница на Blog
         <?php if (have_posts()): ?>
                 <?php while (have_posts()): ?>
             <?php the_post(); ?>
-            <?php $posts = get_posts([
-                'numberposts' => 3,
-            ]); ?>
-            <?php foreach ($posts
 
-                           as $post): ?>
-                <?php setup_postdata($post); ?>
                 <article class="post">
 
                     <div class="entry-header cf">
@@ -68,8 +62,7 @@ Template Name: Страница на Blog
                     </div>
 
                 </article> <!-- post end -->
-            <?php endforeach; ?>
-            <?php wp_reset_postdata(); ?>
+
             <article class="post">
 
                 <div class="entry-header cf">
