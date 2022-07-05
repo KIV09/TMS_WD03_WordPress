@@ -65,7 +65,14 @@
                 <p>Нет записей</p>
             <?php endif; ?>
             <?php wp_reset_postdata(); ?>
+        </div>
             <!-- Comments
+
 ================================================== -->
+            <div id="secondary" class="four columns end">
+                <aside id="sidebar">
+                    <?php get_sidebar("right-sidebar")?>
+                </aside>
+            </div>
 
 <?php get_footer(); ?>
