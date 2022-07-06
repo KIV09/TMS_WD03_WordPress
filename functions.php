@@ -2,6 +2,7 @@
 add_action( 'after_setup_theme', 'theme_setup' );
 
 function theme_setup() {
+    add_theme_support('title-tag');
 	add_theme_support('post-thumbnails');
 
 	add_image_size('article_image', 500, 300, ['left', 'top']);
@@ -87,7 +88,7 @@ function registerWidgetsArea() {
 }
 
 
-add_filter('get_comments_number', 'commentNumber');
+add_filter('comment_text', 'commentNumber');
 function commentNumber($number) {
 	$comment = 'комментари';
 	if ($number % 100 >= 1 && $number % 100 <= 4) {
@@ -156,3 +157,5 @@ function newThemeCommentEnd($comment, $args, $depth) {
 	</li>
 	<?
 }
+
+add_filter('wpseo_json_ld_output', '__return_false');
