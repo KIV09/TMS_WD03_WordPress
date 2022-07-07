@@ -7,9 +7,6 @@
     <!--- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Roman Piletsky Homework Wordpress</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <!-- Mobile Specific Metas
     ================================================== -->
