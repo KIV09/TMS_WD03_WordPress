@@ -6,6 +6,44 @@ Template Name: Главная страница
 
 <?php get_header(); ?>
 
+<?php if ( is_front_page() ): ?>
+	<?php $slider = get_field( 'slider' ); ?>
+
+	<?php if ( ! empty( $slider ) ): ?>
+        <section id="intro">
+
+            <!-- Flexslider Start-->
+            <div id="intro-slider" class="flexslider">
+
+                <ul class="slides">
+
+					<?php foreach ( $slider as $slide ): ?>
+                        <!-- Slide -->
+        <li>
+            <div class="row">
+                <div class="twelve columns">
+                    <div class="slider-text">
+                        <h1><?= $slide['title']; ?></h1>
+
+                        <?= $slide['text']; ?>
+                    </div>
+                    <div class="slider-image">
+                        <?= wp_get_attachment_image($slide['image'], 'large'); ?>
+                    </div>
+                </div>
+            </div>
+        </li>
+					<?php endforeach; ?>
+
+                </ul>
+
+            </div> <!-- Flexslider End-->
+
+        </section> <!-- Intro Section End-->
+	<?php endif; ?>
+
+<?php endif; ?>
+
 
     <!-- Content
 	================================================== -->
@@ -22,53 +60,49 @@ Template Name: Главная страница
 				?>
 
 
-        <?php foreach ($posts as $post): ?>
-            <?php setup_postdata($post); ?>
+				<?php foreach ( $posts as $post ): ?>
+					<?php setup_postdata( $post ); ?>
 
-            <article class="entry">
+                    <article class="entry">
 
-            <header class="entry__header">
+                        <header class="entry__header">
 
-                <h2 class="entry__title h1">
-                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-	                    <?php the_title(); ?>
-                    </a>
-                </h2>
-
-                <div class="entry__meta">
-                    <ul>
-                        <li><?php the_time(); ?></li>
-
-	                    <?php
-	                    $categories = get_the_category();
-	                    ?>
-	                    <?php foreach ( $categories as $category ): ?>
-                            <li>
-                                <a href="<?php echo get_term_link( $category ); ?>">
-				                    <?php echo $category->name; ?>
+                            <h2 class="entry__title h1">
+                                <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+									<?php the_title(); ?>
                                 </a>
-                            </li>
-	                    <?php endforeach; ?>
+                            </h2>
 
-                        <li><?php the_author(); ?></li>
-                    </ul>
-                </div>
+                            <div class="entry__meta">
+                                <ul>
+                                    <li><?php the_time(); ?></li>
 
-            </header>
+									<?php
+									$categories = get_the_category();
+									?>
+									<?php foreach ( $categories as $category ): ?>
+                                        <li>
+                                            <a href="<?php echo get_term_link( $category ); ?>">
+												<?php echo $category->name; ?>
+                                            </a>
+                                        </li>
+									<?php endforeach; ?>
 
-            <div class="entry__content">
-	            <?php the_excerpt(); ?>
-            </div>
+                                    <li><?php the_author(); ?></li>
+                                </ul>
+                            </div>
 
-        </article> <!-- end entry -->
+                        </header>
 
-        <?php endforeach;?>
+                        <div class="entry__content">
+							<?php the_excerpt(); ?>
+                        </div>
 
-                <?php wp_reset_postdata(); ?>
+                    </article> <!-- end entry -->
 
+				<?php endforeach; ?>
 
-
-
+				<?php wp_reset_postdata(); ?>
 
 
             </div> <!-- end main -->
@@ -76,7 +110,7 @@ Template Name: Главная страница
 
             <div id="sidebar" class="s-content__sidebar large-4 column">
 
-				<?php get_sidebar('contact'); ?>
+				<?php get_sidebar( 'contact' ); ?>
 
             </div> <!-- end sidebar -->
 

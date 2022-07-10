@@ -61,8 +61,13 @@ function scriptEnqueued() {
 
 	wp_enqueue_script( 'new_theme-main', get_template_directory_uri() . '/js/main.js', [], 111, true );
 
+	wp_enqueue_script( 'new_theme-flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', [], 111, true );
+	wp_enqueue_script( 'new_theme-slider', get_template_directory_uri() . '/js/slider.js', ['new_theme-flexslider'], 111, true );
+
 	wp_enqueue_style( 'new_theme-base', get_template_directory_uri() . '/css/base.css' );
 	wp_enqueue_style( 'new_theme-main', get_template_directory_uri() . '/css/main.css' );
+
+	wp_enqueue_style( 'new_theme-slider', get_template_directory_uri() . '/css/slider.css' );
 }
 
 add_filter( 'show_admin_bar', '__return_false' );
@@ -159,3 +164,14 @@ function newThemeCommentEnd($comment, $args, $depth) {
 }
 
 add_filter('wpseo_json_ld_output', '__return_false');
+
+add_action('acf/init', 'addOptionsPage');
+function addOptionsPage() {
+    if (function_exists('acf_add_options_page')) {
+	    acf_add_options_page( [
+		    'page_title' => 'Основные настройки темы',
+		    'menu_title' => 'Настройки темы',
+		    'menu_slug'  => 'main-options-theme'
+	    ] );
+    }
+}
