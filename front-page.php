@@ -39,50 +39,31 @@
 
 <!-- Info Section
 ================================================== -->
+
+<?php $constructor = get_field("notes", get_the_ID())?>
+
+<?php if (!empty($constructor)): ?>
 <section id="info">
 
     <div class="row">
 
         <div class="bgrid-quarters s-bgrid-halves">
+            <?php foreach ($constructor as $item): ?>
+            <?php if ($item["acf_fc_layout"] == "columns_block"): ?>
+            <?php foreach ($item["columns"] as $column): ?>
+                <div class="columns">
+                <h2><?= $column["title"] ?>.</h2>
 
-            <div class="columns">
-                <h2>Clean & Modern.</h2>
-
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
+                <p><?= $column["text"] ?></p>
             </div>
-
-            <div class="columns">
-                <h2>Responsive.</h2>
-
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
-            </div>
-
-            <div class="columns s-first">
-                <h2>HTML5 + CSS3.</h2>
-
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
-            </div>
-
-            <div class="columns">
-                <h2>Free of Charge.</h2>
-
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
-            </div>
-
+            <?php endforeach; ?>
         </div>
-
+        <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 
 </section> <!-- Info Section End-->
-
+<?php endif; ?>
 <!-- Works Section
 ================================================== -->
 <section id="works">
