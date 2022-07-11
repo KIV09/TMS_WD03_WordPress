@@ -3,51 +3,39 @@
 <!-- Intro Section
 ================================================== -->
 <section id="intro">
+    <?php if (is_front_page()): ?>
+    <?php $slider = get_field("slider"); ?>
+    <?php if (!empty($slider)): ?>
+
 
     <!-- Flexslider Start-->
     <div id="intro-slider" class="flexslider">
 
         <ul class="slides">
-
+            <?php foreach ($slider as $slide): ?>
             <!-- Slide -->
             <li>
                 <div class="row">
                     <div class="twelve columns">
                         <div class="slider-text">
-                            <h1>Free amazing site template<span>.</span></h1>
-                            <p>Aenean condimentum, lacus sit amet luctus lobortis, dolores et quas molestias excepturi
-                                enim tellus ultrices elit, amet consequat enim elit noneas sit amet luctu. lacus sit amet luctus lobortis, dolores et quas molestias excepturi
-                                enim tellus ultrices elit.</p>
+                            <h1><?= $slide["title"]?><span>.</span></h1>
+                            <p><?= $slide["text"]?></p>
                         </div>
                         <div class="slider-image">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-01.png" alt="" />
+                            <?= wp_get_attachment_image($slide["image"], "large");?>
                         </div>
                     </div>
                 </div>
             </li>
-
-            <!-- Slide -->
-            <li>
-                <div class="row">
-                    <div class="twelve columns">
-                        <div class="slider-text">
-                            <h1>Responsive + HTML5 + CSS3<span>.</span></h1>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                                deleniti eos et accusamus. amet consequat enim elit noneas sit amet luctu. lacus sit amet luctus lobortis.
-                                Aenean condimentum, lacus sit amet luctus.</p>
-                        </div>
-                        <div class="slider-image">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-02.png" alt="" />
-                        </div>
-                    </div>
-                </div>
-            </li>
+            <?php endforeach;?>
 
         </ul>
 
     </div> <!-- Flexslider End-->
 
 </section> <!-- Intro Section End-->
+<?php endif; ?>
+<?php endif; ?>
 
 <!-- Info Section
 ================================================== -->
