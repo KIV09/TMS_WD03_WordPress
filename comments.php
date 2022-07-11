@@ -2,7 +2,7 @@
 
 	<div id="comments">
 
-		<h3><?= get_comments_number(); ?></h3>
+		<h3><?= get_comments_number_text(); ?></h3>
 
         <?php if (have_comments()): ?>
 
