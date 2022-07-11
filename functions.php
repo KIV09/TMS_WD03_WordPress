@@ -3,6 +3,7 @@ add_action('after_setup_theme', 'theme_register_nav_menu');
 
 function theme_register_nav_menu()
 {
+    add_theme_support('post-thumbnails');
     register_nav_menu('top', 'Главное меню dz');
     register_nav_menu('bottom', 'Меню в футоре dz');
 }
@@ -23,6 +24,7 @@ function scriptEnqueued($handle)
     wp_enqueue_style('new-theme-media-queries', get_template_directory_uri() . '/assets/css/media-queries.css', []);
 
 }
+
 add_filter('show_admin_bar', '__return_false');
 
 
@@ -60,9 +62,83 @@ function linksOutput($html)
     }
     return $html;
 }
+
 add_filter('excerpt_more', 'excerptMore');
 function excerptMore($more)
 {
     global $post;
-    return '<a href="' . get_permalink($post->ID) . '"> Read More</a>';
+    return '<a class="more-link" href="' . get_permalink($post->ID) . '">
+ Read More<i class="fa fa-arrow-circle-o-right"></i></a>';
+
 }
+
+add_filter('get_comments_number', 'commentNumber');
+function commentNumber($number)
+{
+    $comment = 'комментари';
+    if ($number % 100 >= 1 && $number % 100 <= 4) {
+        if ($number % 10 == 1) {
+            $comment .= 'й';
+        } else {
+            $comment .= 'я';
+        }
+    } else {
+        $comment .= 'ев';
+    }
+    return $number . ' ' . $comment;
+}
+
+function newThemeComment($comment, $args, $depth)
+{
+    ?>
+    <li class="thread-alt depth- <?php $depth ?>">
+
+    <div class="avatar">
+        <?= get_avatar($comment, 120); ?>
+    </div>
+
+
+    <div class="comment-info">
+        <cite><?= get_comment_author(); ?></cite>
+        <?php if (!$comment->comment_approved): ?>
+            <div class="not-approved"> коммент не подтвержден</div>
+        <?php endif; ?>
+        <div class="comment-meta">
+            <time class="comment-time" datetime="2014-01-14T24:05"><?= get_comment_date(); ?></time>
+            <span class="sep">/</span>
+            <?php
+            comment_reply_link(array_merge($args, [
+                'depth' => $depth,
+                'max_depth' => $args['max_depth']
+            ]));
+            ?>
+        </div>
+    </div>
+
+    <div class="comment-text">
+        <?php comment_text(); ?>
+
+    </div>
+
+
+    <?php if ($comment->children): ?>
+    <ul class="children">
+<? endif; ?>
+
+
+    <?php
+}
+
+function newThemeCommentEnd($comment, $args, $depth)
+{
+    ?>
+    <?php if ($comment->children): ?>
+
+    </ul>
+<? endif; ?>
+
+    </li>
+    <?php
+}
+
+add_filter('wpseo_json_ld_output', '__return_false');

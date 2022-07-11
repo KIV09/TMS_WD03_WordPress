@@ -1,13 +1,21 @@
-<?php
 
-?>
 
 <?php get_header(); ?>
 
-    <!-- Page Title
-      ================================================== -->
+    <div id="page-title">
 
+        <div class="row">
 
+            <div class="ten columns centered text-center">
+                <h1>Our Blog<span>.</span></h1>
+
+                <p>Aenean condimentum, lacus sit amet luctus lobortis, dolores et quas molestias excepturi
+                    enim tellus ultrices elit, amet consequat enim elit noneas sit amet luctu. </p>
+            </div>
+
+        </div>
+
+    </div> <!-- Page Title End-->
     <!-- Content
     ================================================== -->
     <div class="content-outer">
@@ -45,13 +53,13 @@
                         </p>
 
                     </div>
-<!--
+                    <?php if (has_post_thumbnail()): ?>
                     <div class="post-thumb">
-                        <a href="<?= get_template_directory_uri(); ?>single.html" title=""><img
-                                    src="<?= get_template_directory_uri(); ?>/assets/images/post-image/post-image-1300x500-01.jpg"
-                                    alt="post-image" title="post-image"></a>
+                                <?php the_post_thumbnail("list_image"); ?>
+
                     </div>
--->
+                    <?php endif; ?>
+
                     <div class="post-content">
                         <?php the_excerpt(); ?>
                         <!-- <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
@@ -65,90 +73,9 @@
                     </div>
 
                 </article> <!-- post end -->
-
-            <article class="post">
-
-                <div class="entry-header cf">
-
-                    <h1><a href="<?= get_template_directory_uri(); ?>single.html" title="">Proin gravida nibh vel
-                            velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
-
-                    <p class="post-meta">
-
-                        <time class="date" datetime="2014-01-14T11:24">Jan 14, 2013</time>
-                        /
-                        <span class="categories">
-                     <a href="#">Design</a> /
-                     <a href="#">User Inferface</a> /
-                     <a href="#">Web Design</a>
-                     </span>
-
-                    </p>
-
-                </div>
-
-                <div class="post-thumb">
-                    <a href="<?= get_template_directory_uri(); ?>single.html" title=""><img
-                                src="<?= get_template_directory_uri(); ?>/assets/images/post-image/post-image-1300x500-02.jpg"
-                                alt="post-image" title="post-image"></a>
-                </div>
-
-                <div class="post-content">
-
-                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                        nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh
-                        vulputate
-                        cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor
-                        a
-                        ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
-
-                </div>
-
-            </article> <!-- post end -->
-
-            <article class="post">
-
-                <div class="entry-header cf">
-
-                    <h1><a href="<?= get_template_directory_uri(); ?>single.html" title="">Proin gravida nibh vel
-                            velit auctor aliquet Aenean sollicitudin auctor.</a></h1>
-
-                    <p class="post-meta">
-
-                        <time class="date" datetime="2014-01-14T11:24">Jan 14, 2014</time>
-                        /
-                        <span class="categories">
-                     <a href="#">Design</a> /
-                     <a href="#">User Inferface</a> /
-                     <a href="#">Web Design</a>
-                     </span>
-
-                    </p>
-
-                </div>
-
-                <div class="post-thumb">
-                    <a href="<?= get_template_directory_uri(); ?>single.html" title=""><img
-                                src="<?= get_template_directory_uri(); ?>/assets/images/post-image/post-image-1300x500-03.jpg"
-                                alt="post-image" title="post-image"></a>
-                </div>
-
-                <div class="post-content">
-
-                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                        nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh
-                        vulputate
-                        cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor
-                        a
-                        ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
-
-                </div>
-
-            </article> <!-- post end -->
-
+                <?php endwhile; ?>
             <!-- Pagination -->
             <nav class="col full pagination">
-                <?php endwhile; ?>
                 <!-- page nav -->
                 <?php the_posts_pagination(); ?>
                 <ul>
@@ -167,6 +94,7 @@
                 <?php else: ?>
                 <p>Нет записи</p>
             <?php endif; ?>
+                <?php wp_reset_postdata(); ?>
             </nav>
 
         </div> <!-- Primary End-->
