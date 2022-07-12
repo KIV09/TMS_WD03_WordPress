@@ -2,67 +2,59 @@
 ================================================== -->
 <footer class="s-footer">
 
+    <?php if ($socials = get_field('socials', 'options')): ?>
     <div class="row s-footer__top">
         <div class="column">
             <ul class="s-footer__social">
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-vimeo-v" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                <li><a href="<?= get_template_directory_uri(); ?>/#0"><i class="fab fa-skype" aria-hidden="true"></i></a></li>
+                <?php foreach ($socials as $social): ?>
+                <li>
+                    <a href="<?= $social['social_link']; ?>">
+<i class="fab fa-<?= strtolower($social['social_name']); ?>" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div> <!-- end footer__top -->
+    <?php endif; ?>
 
+    <?php $left_column = get_field('left_column', 'options'); ?>
     <div class="row s-footer__bottom">
 
         <div class="large-6 tab-full column s-footer__info">
-            <h3 class="h6">About Keep It Simple</h3>
+            <h3 class="h6"><?= $left_column['title']; ?></h3>
 
-            <p>
-                Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor
-                aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur
-                sint cillum sint consectetur voluptate adipisicing Duis
-            </p>
-
-            <p>
-                Lorem ipsum Sed nulla deserunt voluptate elit occaecat culpa cupidatat sit irure sint
-                sint incididunt cupidatat esse in Ut sed commodo tempor consequat culpa fugiat incididunt.
-            </p>
+            <?= $left_column['text']; ?>
         </div>
 
         <div class="large-6 tab-full column">
             <div class="row">
+
+                <?php $middle_column = get_field('middle_column', 'options'); ?>
                 <div class="large-8 tab-full column">
 
-                    <h3 class="h6">Photostream</h3>
+                    <h3 class="h6"><?= $middle_column['title']; ?></h3>
 
                     <ul class="photostream group">
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
-                        <li><a href="<?= get_template_directory_uri(); ?>/#0"><img alt="thumbnail" src="<?= get_template_directory_uri(); ?>/images/thumb.jpg"></a></li>
+
+                        <?php foreach ($middle_column['gallery'] as $picture): ?>
+                        <li>
+        <a href="<?= wp_get_attachment_image_url($picture, 'large'); ?>" data-fancybox="gallery">
+            <?= wp_get_attachment_image($picture, 'thumbnail'); ?>
+        </a>
+                        </li>
+                        <?php endforeach;?>
+
                     </ul>
 
                 </div>
 
-                <div class="large-4 tab-full column">
-                    <h3  class="h6">Navigate</h3>
+    <?php $right_column = get_field('right_column', 'options'); ?>
+    <div class="large-4 tab-full column">
+        <h3  class="h6"><?= $right_column['title']; ?></h3>
 
-                    <?php wp_nav_menu([
-                        'theme_location' => 'bottom',
-                        'container' => 'ul',
-                        'menu_class' => 's-footer__list s-footer-list--nav group',
-                        'depth' => 1
-                    ]); ?>
-
-                </div>
+        <?= $right_column['menu']; ?>
+    </div>
             </div>
         </div>
 

@@ -64,10 +64,14 @@ function scriptEnqueued() {
 	wp_enqueue_script( 'new_theme-flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', [], 111, true );
 	wp_enqueue_script( 'new_theme-slider', get_template_directory_uri() . '/js/slider.js', ['new_theme-flexslider'], 111, true );
 
+	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js' );
+
 	wp_enqueue_style( 'new_theme-base', get_template_directory_uri() . '/css/base.css' );
 	wp_enqueue_style( 'new_theme-main', get_template_directory_uri() . '/css/main.css' );
 
 	wp_enqueue_style( 'new_theme-slider', get_template_directory_uri() . '/css/slider.css' );
+
+	wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css' );
 }
 
 add_filter( 'show_admin_bar', '__return_false' );
@@ -174,4 +178,85 @@ function addOptionsPage() {
 		    'menu_slug'  => 'main-options-theme'
 	    ] );
     }
+}
+
+add_shortcode('menu', 'menuShortcode');
+function menuShortcode($atts) {
+    $atts = shortcode_atts([
+        'name' => '',
+        'location' => ''
+    ], $atts);
+
+    $args = [
+	    'container' => 'ul',
+	    'menu_class' => 's-footer__list s-footer-list--nav group',
+	    'depth' => 1,
+        'echo' => false
+    ];
+
+    if (empty($atts['location']) && empty($atts['name'])) {
+        return '';
+    } elseif (!empty($atts['location'])) {
+        $args['theme_location'] = $atts['location'];
+    } else {
+        $args['menu'] = $atts['name'];
+    }
+
+    return wp_nav_menu($args);
+}
+
+add_filter('acf/format_value', 'acfDoShortcode');
+function acfDoShortcode($value) {
+    return !is_array($value) ? do_shortcode($value) : $value;
+}
+
+add_action( 'init', 'register_post_types' );
+function register_post_types(){
+	register_post_type( 'events', [
+		'label'  => null,
+		'labels' => [
+			'name'               => 'События',
+			'singular_name'      => 'Событие',
+			'add_new'            => 'Добавить событие',
+			'add_new_item'       => 'Добавление события',
+			'edit_item'          => 'Редактирование события',
+			'new_item'           => 'Новое событие',
+			'view_item'          => 'Смотреть событие',
+			'search_items'       => 'Искать событие',
+			'not_found'          => 'Не найдено',
+			'not_found_in_trash' => 'Не найдено в корзине',
+			'parent_item_colon'  => '',
+			'menu_name'          => 'События',
+		],
+		'public'              => true,
+		'show_in_rest'        => true,
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-calendar-alt',
+		'capability_type'     => 'post',
+		'supports'            => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
+		'taxonomies'          => [],
+		'has_archive'         => true,
+		'rewrite'             => true,
+		'query_var'           => true,
+	] );
+
+	register_taxonomy( 'events_category', [ 'events' ], [
+		'label'                 => '',
+		'labels'                => [
+			'name'              => 'Категории событий',
+			'singular_name'     => 'Категория событий',
+			'search_items'      => 'Искать категорию',
+			'view_item '        => 'Смотреть категорию',
+			'edit_item'         => 'Редактировать событие',
+			'update_item'       => 'Обновить категорию',
+			'add_new_item'      => 'Добавить новую категорию',
+			'new_item_name'     => 'Новая категория',
+			'menu_name'         => 'Категории событий',
+		],
+		'description'           => '',
+		'public'                => true,
+		'hierarchical'          => true,
+		'rewrite'               => true,
+		'show_in_rest'          => true,
+	] );
 }
