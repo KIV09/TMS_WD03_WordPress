@@ -4,7 +4,7 @@ add_action('after_setup_theme', 'theme_register_nav_menu');
 
 function theme_register_nav_menu()
 {
-    add_theme_support('title-tag');
+    add_theme_support('title-tag'); // добавляем тег title
 
     register_nav_menu('top', 'Главное меню');
     register_nav_menu('bottom', 'Меню для футера');
@@ -105,4 +105,4 @@ function newThemeCommentEnd($comment, $args, $depth)
     <?php
 }
 
-add_filter('wpseo_json_ld_output', '__return_false');
+add_filter('wpseo_json_ld_output', '__return_false'); //убираем большой скрипт для вывода на странице
