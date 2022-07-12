@@ -27,7 +27,7 @@ function scriptEnqueued($handle)
     wp_enqueue_script('dz-doubletaptogo', get_template_directory_uri() . "/assets/js/doubletaptogo.js", [], 111, true);
     wp_enqueue_script('dz-init', get_template_directory_uri() . "/assets/js/init.js", [], 111, true);
 
-    wp_enqueue_script("dz-jquery-min", get_template_directory_uri() . "/assets/js/jquery.min.js", [], 111, true);
+    //wp_enqueue_script("dz-jquery-min", get_template_directory_uri() . "/assets/js/jquery.min.js", [], 111, true);
 
     wp_enqueue_style('dz-default', get_template_directory_uri() . "/assets/css/default.css");
     wp_enqueue_style('dz-layout', get_template_directory_uri() . "/assets/css/layout.css");
