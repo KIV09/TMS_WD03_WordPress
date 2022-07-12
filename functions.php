@@ -52,12 +52,14 @@ function scriptEnqueued()
 
     wp_enqueue_script('dz-modernizr', get_template_directory_uri() . '/assets/js/modernizr.js', '[]', '111', 'false');
     wp_enqueue_script('dz-flexslider', get_template_directory_uri() . '/assets/js/jquery.flexslider.js', '[]', '111', 'true');
+    wp_enqueue_script('dz-slider', get_template_directory_uri() . '/assets/js/slider.js', ['dz-flexslider'], '111', 'true');
     wp_enqueue_script('dz-doubletaptogo', get_template_directory_uri() . '/assets/js/doubletaptogo.js', '[]', '111', 'true');
     wp_enqueue_script('dz-init', get_template_directory_uri() . '/assets/js/init.js', '[]', '111', 'true');
 
     wp_enqueue_style('dz-default', get_template_directory_uri() . '/assets/css/default.css');
     wp_enqueue_style('dz-layout', get_template_directory_uri() . '/assets/css/layout.css');
     wp_enqueue_style('dz-media-queries', get_template_directory_uri() . '/assets/css/media-queries.css');
+    wp_enqueue_style('dz-slider', get_template_directory_uri() . '/assets/css/slider.css');
 }
 
 // Отключаем админ бар
