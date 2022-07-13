@@ -152,3 +152,35 @@ function addOptionsPage (){
         ]);
     }
 }
+
+add_shortcode('menuFooter', 'menuShortcode');
+function menuShortcode($atts)
+{
+    $atts = shortcode_atts([
+        'name' => '',
+        'location' => '',
+    ], $atts);
+
+    $args = [
+        'container' => 'ul',
+        'menu_class' => 'footer-nav',
+        'depth' => 1,
+        'echo' => false,
+    ];
+
+    if (empty($atts['location']) && empty($atts['name'])) {
+        return '';
+    } elseif (!empty($atts['location'])) {
+        $args['theme_location'] = $atts['location'];
+    } else {
+        $args['menuFooter'] = $atts['name'];
+    }
+
+    return wp_nav_menu($args);
+}
+
+add_filter('acf/format_value', 'acfDoShortcode');
+function acfDoShortcode($value)
+{
+    return !is_array($value) ? do_shortcode($value) : $value;
+}

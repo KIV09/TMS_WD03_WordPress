@@ -238,18 +238,19 @@
 
         <div class="row">
 
+            <?php $call_to_action = get_field('call_to_action', 'options')?>
+
             <div class="tweeter-icon align-center">
-                <i class="fa fa-twitter"></i>
+                <i class="fa fa-<?= strtolower($call_to_action['icon']); ?>"></i>
             </div>
 
             <ul id="twitter" class="align-center">
                 <li>
                <span>
-               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-               <a href="#">http://t.co/CGIrdxIlI3</a>
+               <?= ($call_to_action['text']); ?>
+               <a href="<?= $call_to_action['link']; ?>">http://t.co/CGIrdxIlI3</a>
                </span>
-                    <b><a href="#">2 Days Ago</a></b>
+                    <b><?= ($call_to_action['date']); ?></b>
                 </li>
                 <!--
                 <li>
@@ -263,7 +264,7 @@
                 -->
             </ul>
 
-            <p class="align-center"><a href="#" class="button">Follow us</a></p>
+            <p class="align-center"><a href="<?= ($call_to_action['button_link']); ?>" class="button"><?= ($call_to_action['button_text']); ?></a></p>
 
         </div>
 
