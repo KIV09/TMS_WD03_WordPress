@@ -6,23 +6,22 @@
 <section id="tweets">
 
     <div class="row">
-
+        <?php $call_action = get_field("call_action", "options"); ?>
         <div class="tweeter-icon align-center">
-            <i class="fa fa-twitter"></i>
+            <?= wp_get_attachment_image($call_action["icon"], "icon_image"); ?>
         </div>
 
         <ul id="twitter" class="align-center">
             <li>
                <span>
-               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-               <a href="#">http://t.co/CGIrdxIlI3</a>
+                <?= $call_action["text"]; ?>
+               <a href="<?= $call_action["link"]; ?>"><?= $call_action["link"]; ?></a>
                </span>
-                <b><a href="#">2 Days Ago</a></b>
+                <b><?= $call_action["date"]; ?></b>
             </li>
         </ul>
 
-        <p class="align-center"><a href="#" class="button">Follow us</a></p>
+        <p class="align-center"><a href="<?= $call_action["link"]; ?>" class="button">Visit</a></p>
 
     </div>
 

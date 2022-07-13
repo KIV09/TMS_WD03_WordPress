@@ -7,6 +7,7 @@ function theme_setup()
 
     add_image_size("article_image", 1300, 500, ["center", "center"]);
     add_image_size("list_image", 650, 300, ["center", "center"]);
+    add_image_size("icon_image", 64, 64, ["center", "center"]);
 
     register_nav_menu('top', 'Header menu');
     register_nav_menu('bottom', 'Footer menu');
