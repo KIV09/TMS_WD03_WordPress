@@ -33,14 +33,13 @@ Template Name: Portfolio
 
             <div id="secondary"  class="four columns entry-details">
 
-                <h1>Geometrics.</h1>
+                <h1><?php the_title(); ?></h1>
 
                 <div class="entry-description">
 
-                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                        nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                        cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
-                        ornare odio.</p>
+                    <p>
+                        <?php the_content(); ?>
+                    </p>
 
                 </div>
 
@@ -57,20 +56,20 @@ Template Name: Portfolio
             <div id="primary" class="eight columns">
 
                 <div class="entry-media">
-
-                    <img src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/entries/geometric-backgrounds-01.jpg" alt="" />
-
-                    <img src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/entries/geometric-backgrounds-02.jpg" alt="" />
-
+                    <?php if (has_post_thumbnail()): ?>
+                        <div class="entry__content-media">
+                            <?php the_post_thumbnail('large'); ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
-                <div class="entry-excerpt">
-
-                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
-                        nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
-                        cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>
-
-                </div>
+<!--                <div class="entry-excerpt">-->
+<!---->
+<!--                    <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,-->
+<!--                        nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate-->
+<!--                        cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>-->
+<!---->
+<!--                </div>-->
 
             </div> <!-- primary end-->
 
