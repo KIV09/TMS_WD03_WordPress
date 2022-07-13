@@ -1,6 +1,35 @@
 <!-- footer
 ================================================== -->
+
+<!-- Tweets Section
+================================================== -->
+<section id="tweets">
+
+    <div class="row">
+
+        <div class="tweeter-icon align-center">
+            <i class="fa fa-twitter"></i>
+        </div>
+
+        <ul id="twitter" class="align-center">
+            <li>
+               <span>
+               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
+               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
+               <a href="#">http://t.co/CGIrdxIlI3</a>
+               </span>
+                <b><a href="#">2 Days Ago</a></b>
+            </li>
+        </ul>
+
+        <p class="align-center"><a href="#" class="button">Follow us</a></p>
+
+    </div>
+
+</section> <!-- Tweet Section End-->
+
 <footer>
+
 
     <div class="row">
 
@@ -12,16 +41,14 @@
                 "menu_class" => "footer-nav",
                 "depth" => 1,
             ]); ?>
-
+            <?php if ($socials = get_field("socials", "options")): ?>
             <ul class="footer-social">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                <li><a href="#"><i class="fa fa-rss"></i></a></li>
-            </ul>
+                <?php foreach ($socials as $social): ?>
+                    <li><a href="<?= $social["social_link"]; ?>"><i class="fa fa-<?= strtolower($social["social_name"]); ?>" aria-hidden="true"></i></a></li>
+                <?php endforeach; ?>
 
+            </ul>
+            <?php endif; ?>
             <ul class="copyright">
                 <li>Copyright &copy; 2014 Sparrow</li>
                 <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>

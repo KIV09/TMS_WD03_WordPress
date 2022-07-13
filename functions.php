@@ -159,4 +159,17 @@ function newThemeCommentEnd($comment, $args, $depth) {
 }
 add_filter("wpseo_json_ld_output", "__return_false");
 
+add_action("acf/init", "addOptionsPage");
+function addOptionsPage()
+{
+    if (function_exists("acf_add_options_page")) {
+        acf_add_options_page([
+            "page_title" => "General settings of theme",
+            "menu_title" => "Setting of theme",
+            "menu_slug" => "main-options-theme",
+        ]);
+    }
+}
+
+
 
