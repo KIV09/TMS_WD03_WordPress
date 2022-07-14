@@ -1,6 +1,6 @@
 <div id="comments">
 
-    <h3><?php get_comments_number(); ?> comments</h3>
+    <h3><?= get_comments_number_text(); ?> comments</h3>
     <?php if (have_comments()): ?>
 
         <ol class="commentlist">

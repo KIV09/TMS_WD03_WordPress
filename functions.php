@@ -39,6 +39,14 @@ function registerWidgetsArea()
         'before_title' => '<h3 class="h6">',
         'after_title' => '</h3>',
     ]);
+    register_sidebar([
+        'name' => 'Контакты колонка',
+        'id' => 'sidebar-contact',
+        'before_widget' => '<div class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="h6">',
+        'after_title' => '</h3>',
+    ]);
 }
 
 add_filter('navigation_markup_template', 'archivePagination', 10, 2);
@@ -72,7 +80,7 @@ function excerptMore($more)
 
 }
 
-add_filter('get_comments_number', 'commentNumber');
+
 function commentNumber($number)
 {
     $comment = 'комментари';
