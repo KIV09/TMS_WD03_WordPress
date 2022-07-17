@@ -30,7 +30,7 @@
 		<?php global $wp_query; ?>
 		<?php if ( $wp_query->max_num_pages > 1 ): ?>
 			<div class="column large-4 load-more">
-				<a class="btn btn--primary h-full-width" href="#0">Primary Button</a>
+				<a class="btn btn--primary h-full-width" href="javascript:void(0);">Primary Button</a>
 			</div>
 		<?php endif; ?>
 	</div>

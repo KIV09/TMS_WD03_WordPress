@@ -1,4 +1,6 @@
 <?php
+require_once 'include/acf.php';
+
 add_action( 'after_setup_theme', 'theme_setup' );
 
 function theme_setup() {
@@ -52,19 +54,25 @@ function scriptEnqueued() {
 	wp_enqueue_script('jquery');
 
 
-	wp_enqueue_script( 'new_theme-jquery-migrate', get_template_directory_uri() . '/js/jquery-migrate-1.2.1.min.js', ['jquery']);
-
-
-
 	wp_enqueue_script( 'new_theme-modernizr', get_template_directory_uri() . '/js/modernizr.js', [], 111, false );
 	wp_enqueue_script( 'new_theme-all', get_template_directory_uri() . '/js/fontawesome/all.min.js', [], 111, false );
 
-	wp_enqueue_script( 'new_theme-main', get_template_directory_uri() . '/js/main.js', [], 111, true );
+	wp_enqueue_script( 'new_theme-main', get_template_directory_uri() . '/js/main.js', ['jquery'], 111, false );
 
 	wp_enqueue_script( 'new_theme-flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', [], 111, true );
 	wp_enqueue_script( 'new_theme-slider', get_template_directory_uri() . '/js/slider.js', ['new_theme-flexslider'], 111, true );
 
 	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js' );
+
+	global $wp_query;
+	wp_localize_script('new_theme-main', 'ajax_query',
+		array(
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'query_vars' => json_encode($wp_query->query_vars),
+			'current_page' => get_query_var('paged') ? get_query_var('paged') : 1,
+		)
+	);
+	wp_enqueue_script( 'new_theme-load_more', get_template_directory_uri() . '/js/load_more.js', ['new_theme-main'] );
 
 	wp_enqueue_style( 'new_theme-base', get_template_directory_uri() . '/css/base.css' );
 	wp_enqueue_style( 'new_theme-main', get_template_directory_uri() . '/css/main.css' );
@@ -168,6 +176,8 @@ function newThemeCommentEnd($comment, $args, $depth) {
 }
 
 add_filter('wpseo_json_ld_output', '__return_false');
+add_filter('wpseo_next_rel_link', '__return_false');
+add_filter('wpseo_prev_rel_link', '__return_false');
 
 add_action('acf/init', 'addOptionsPage');
 function addOptionsPage() {
@@ -259,4 +269,34 @@ function register_post_types(){
 		'rewrite'               => true,
 		'show_in_rest'          => true,
 	] );
+}
+
+add_action( 'wp_ajax_show_more', 'blog_load_posts' );
+add_action( 'wp_ajax_nopriv_show_more', 'blog_load_posts' );
+function blog_load_posts() {
+	$args          = json_decode( stripslashes( $_POST['query'] ), true );
+	$args['paged'] = $_POST['page'] ++;
+
+	$html = '';
+
+	$q = new WP_Query( $args );
+	if ($q->have_posts()) {
+		while ($q->have_posts()) {
+			$q->the_post();
+
+			ob_start();
+			get_template_part( 'event_item' );
+			$html = ob_get_clean();
+		}
+
+		$q->reset_postdata();
+	}
+
+	$is_show_button = true;
+	if ( $args['paged'] == $q->max_num_pages ) {
+		$is_show_button = false;
+	}
+
+	echo json_encode( [ 'html' => $html, 'is_show_button' => $is_show_button, 'paged' => $args['paged'] ] );
+	die();
 }
