@@ -1,79 +1,66 @@
-
-
 <!-- Header
 ================================================== -->
 <?php get_header(); ?>
 
 <!-- Intro Section
 ================================================== -->
-<section id="intro">
+<?php if (is_front_page()): ?>
+    <?php $slider = get_field('slider'); ?>
+    <?php if (!empty($slider)): ?>
+        <section id="intro">
 
-    <!-- Flexslider Start-->
-    <div id="intro-slider" class="flexslider">
+            <!-- Flexslider Start-->
+            <div id="intro-slider" class="flexslider">
 
-        <ul class="slides">
+                <ul class="slides">
+                    <?php foreach ($slider as $slide): ?>
+                        <!-- Slide -->
+                        <li>
+                            <div class="row">
+                                <div class="twelve columns">
+                                    <div class="slider-text">
+                                        <h1><?= $slide['title']; ?><span>.</span></h1>
+                                        <p><?= $slide['text']; ?></p>
+                                    </div>
+                                    <div class="slider-image">
+                                        <?= wp_get_attachment_image($slide['image'], 'large'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
 
-            <!-- Slide -->
-            <li>
-                <div class="row">
-                    <div class="twelve columns">
-                        <div class="slider-text">
-                            <h1>Free amazing site template<span>.</span></h1>
-                            <p>Aenean condimentum, lacus sit amet luctus lobortis, dolores et quas molestias excepturi
-                                enim tellus ultrices elit, amet consequat enim elit noneas sit amet luctu. lacus sit
-                                amet luctus lobortis, dolores et quas molestias excepturi
-                                enim tellus ultrices elit.</p>
-                        </div>
-                        <div class="slider-image">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-01.png"
-                                 alt=""/>
-                        </div>
-                    </div>
-                </div>
-            </li>
+                    <!-- Slide -->
 
-            <!-- Slide -->
-            <li>
-                <div class="row">
-                    <div class="twelve columns">
-                        <div class="slider-text">
-                            <h1>Responsive + HTML5 + CSS3<span>.</span></h1>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum
-                                deleniti eos et accusamus. amet consequat enim elit noneas sit amet luctu. lacus sit
-                                amet luctus lobortis.
-                                Aenean condimentum, lacus sit amet luctus.</p>
-                        </div>
-                        <div class="slider-image">
-                            <img src="<?= get_template_directory_uri(); ?>/assets/images/sliders/home-slider-image-02.png"
-                                 alt=""/>
-                        </div>
-                    </div>
-                </div>
-            </li>
 
-        </ul>
+                </ul>
 
-    </div> <!-- Flexslider End-->
+            </div> <!-- Flexslider End-->
 
-</section> <!-- Intro Section End-->
-
+        </section> <!-- Intro Section End-->
+    <?php endif; ?>
+<?php endif; ?>
 <!-- Info Section
 ================================================== -->
 <section id="info">
-
+    <?php get_header(); ?>
+    <?php $constructor = get_field('constructor_home', get_the_ID()); ?>
+    <?php if (!empty($constructor)): ?>
     <div class="row">
 
         <div class="bgrid-quarters s-bgrid-halves">
-
+<?php foreach ($constructor as $item): ?>
+            <?php if ($item['acf_fc_layout'] == 'title_block'): ?>
             <div class="columns">
-                <h2>Clean & Modern.</h2>
-
-                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                <h2><?= $item['title']; ?></h2>
+                <?php elseif ($item['acf_fc_layout'] == 'text_block'): ?>
+                <p><?= $item['text']; ?>
                 </p>
             </div>
+    <?php endif; ?>
 
+<?php endforeach; ?>
+            <!--
             <div class="columns">
                 <h2>Responsive.</h2>
 
@@ -97,11 +84,12 @@
                     Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                 </p>
             </div>
+            -->
 
         </div>
 
     </div>
-
+    <?php endif; ?>
 </section> <!-- Info Section End-->
 
 <!-- Works Section
@@ -161,7 +149,8 @@
             <div class="columns portfolio-item">
                 <div class="item-wrap">
                     <a href="<?= get_template_directory_uri(); ?>/portfolio.html">
-                        <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/into-the-light.jpg">
+                        <img alt=""
+                             src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/into-the-light.jpg">
                         <div class="overlay"></div>
                         <div class="link-icon"><i class="fa fa-link"></i></div>
                     </a>
@@ -194,42 +183,42 @@
         ]); ?>
         <?php foreach ($posts
 
-        as $post): ?>
-        <?php setup_postdata($post); ?>
-        <!-- Entry -->
-        <article class="row entry">
+                       as $post): ?>
+            <?php setup_postdata($post); ?>
+            <!-- Entry -->
+            <article class="row entry">
 
-            <div class="entry-header">
+                <div class="entry-header">
 
-                <div class="permalink">
-                    <a href="<?php the_permalink(); ?>"><i class="fa fa-link"></i></a>
+                    <div class="permalink">
+                        <a href="<?php the_permalink(); ?>"><i class="fa fa-link"></i></a>
+                    </div>
+
+                    <div class="ten columns entry-title pull-right">
+                        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                    </div>
+
+                    <div class="two columns post-meta end">
+                        <p>
+                            <time datetime="2014-01-31" class="post-date" pubdate=""><?php the_time('j F Y'); ?></time>
+                            <span class="dauthor"><?php the_author(); ?></span>
+                        </p>
+                    </div>
+
                 </div>
 
-                <div class="ten columns entry-title pull-right">
-                    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                </div>
-
-                <div class="two columns post-meta end">
-                    <p>
-                        <time datetime="2014-01-31" class="post-date" pubdate=""><?php the_time('j F Y'); ?></time>
-                        <span class="dauthor"><?php the_author(); ?></span>
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="ten columns offset-2 post-content">
-                <!--
+                <div class="ten columns offset-2 post-content">
+                    <!--
                 <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
                     deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
                     <a class="more-link" href="<?= get_template_directory_uri(); ?>/single.html">Read More<i
                             class="fa fa-arrow-circle-o-right"></i></a></p>
                             -->
-                <?php the_excerpt(); ?>
-            </div>
+                    <?php the_excerpt(); ?>
+                </div>
 
-        </article> <!-- Entry End -->
+            </article> <!-- Entry End -->
         <?php endforeach; ?>
         <?php wp_reset_postdata(); ?>
         <!-- Entry -->
@@ -260,7 +249,7 @@
                     deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
                     <a class="more-link" href="<?= get_template_directory_uri(); ?>/single.html">Read More<i
-                            class="fa fa-arrow-circle-o-right"></i></a></p>
+                                class="fa fa-arrow-circle-o-right"></i></a></p>
             </div>
 
         </article> <!-- Entry End -->
@@ -293,7 +282,7 @@
                     deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
                     <a class="more-link" href="<?= get_template_directory_uri(); ?>/single.html">Read More<i
-                            class="fa fa-arrow-circle-o-right"></i></a></p>
+                                class="fa fa-arrow-circle-o-right"></i></a></p>
             </div>
 
         </article> <!-- Entry End -->
@@ -312,7 +301,7 @@
 
             <h1><a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Host This Template on Dreamhost.</a></h1>
             <p>Looking for an awesome and reliable webhosting? Try <a
-                    href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
+                        href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
                 Get <span>$50 off</span> when you sign up with the promocode <span>STYLESHOUT</span>.
                 <!-- Simply type	the promocode in the box labeled “Promo Code” when placing your order. --></p>
 
@@ -327,7 +316,6 @@
     </div>
 
 </section> <!-- Call-To-Action Section End-->
-
 
 
 <!-- footer

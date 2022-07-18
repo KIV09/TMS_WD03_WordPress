@@ -3,7 +3,7 @@
 Template Name: Шаблон контакты
 */
 ?>
-<?php get_header();?>
+<?php get_header(); ?>
 <!-- Page Title
    ================================================== -->
 <div id="page-title">
@@ -33,30 +33,24 @@ Template Name: Шаблон контакты
 
                 <h1>Hello. Let's talk.</h1>
 
-                <p class="lead">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
+                <p class="lead">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum
+                    auctor,
                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
                     cursus a sit amet mauris. Morbi accumsan ipsum velit. </p>
 
                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,
                     nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate
                     cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
-                    ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. </p>
+                    ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. </p>
 
                 <div id="contact-form">
 
-                    <!-- form -->
-                    <form name="contactForm" id="contactForm" method="post" action="">
 
-                        <?php if (have_posts()): ?>
-                            <?php while (have_posts()): the_post(); ?>
-                                <?php the_content(); ?>
-                            <?php endwhile; ?>
-                        <?php endif; ?>
-
-
-
-                    </form> <!-- Form End -->
-
+                    <?php if (have_posts()): ?>
+                        <?php while (have_posts()): the_post(); ?>
+                            <?php the_content(); ?>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
 
 
                 </div>
@@ -68,7 +62,7 @@ Template Name: Шаблон контакты
         <div id="secondary" class="four columns end">
 
             <aside id="sidebar">
-<?php get_sidebar('contact');?>
+                <?php get_sidebar('contact'); ?>
 
 
             </aside>

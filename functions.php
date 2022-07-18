@@ -1,4 +1,5 @@
 <?php
+require_once 'include/acf.php';
 add_action('after_setup_theme', 'theme_register_nav_menu');
 
 function theme_register_nav_menu()
@@ -150,3 +151,14 @@ function newThemeCommentEnd($comment, $args, $depth)
 }
 
 add_filter('wpseo_json_ld_output', '__return_false');
+
+add_action('acf/init', 'addOptionsPage');
+function addOptionsPage() {
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page( [
+            'page_title' => 'Основные настройки темы',
+            'menu_title' => 'Настройки темы',
+            'menu_slug'  => 'main-options-theme'
+        ] );
+    }
+}

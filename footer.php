@@ -3,33 +3,21 @@
 <section id="tweets">
 
     <div class="row">
-
+        <?php $section = get_field('tweets_section', 'options'); ?>
         <div class="tweeter-icon align-center">
-            <i class="fa fa-twitter"></i>
+            <i class="fa fa-<?= $section['icon']; ?>"></i>
         </div>
 
         <ul id="twitter" class="align-center">
             <li>
                <span>
-               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-               <a href="#">http://t.co/CGIrdxIlI3</a>
+               <?= $section['text']; ?>
                </span>
-                <b><a href="#">2 Days Ago</a></b>
+                <b><a href="#"><?= $section['date']; ?></a></b>
             </li>
-            <!--
-            <li>
-               <span>
-               This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-               Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum
-               <a href="#">http://t.co/CGIrdxIlI3</a>
-               </span>
-               <b><a href="#">3 Days Ago</a></b>
-            </li>
-            -->
         </ul>
 
-        <p class="align-center"><a href="#" class="button">Follow us</a></p>
+        <p class="align-center"><a href="<?= $section['button_link']; ?>" class="button"><?= $section['button_name']; ?></a></p>
 
     </div>
 
@@ -44,7 +32,7 @@
                 'theme_location' => 'bottom',
                 'container' => 'ul',
                 'menu_class' => 'footer-nav',
-                'depth'=> 1,
+                'depth' => 1,
             ]); ?>
             <!--
             <ul class="footer-nav">
@@ -56,16 +44,17 @@
                 <li><a href="#">Features.</a></li>
             </ul>
             -->
-
-            <ul class="footer-social">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                <li><a href="#"><i class="fa fa-rss"></i></a></li>
-            </ul>
-
+            <?php if ($socials = get_field('socials_home', 'options')): ?>
+                <ul class="footer-social">
+                    <?php foreach ($socials as $social): ?>
+                        <li>
+                            <a href="<?= $social['social_link_home']; ?>">
+                                <i class="fa fa-<?= strtolower($social['social_name_home']); ?>"></i>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
             <ul class="copyright">
                 <li>Copyright &copy; 2014 Sparrow</li>
                 <li>Design by <a href="http://www.styleshout.com/">Styleshout</a></li>
