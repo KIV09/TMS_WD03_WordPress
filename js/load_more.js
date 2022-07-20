@@ -16,6 +16,10 @@ $(document).ready(function () {
                 if (data) {
                     ajax_query.current_page = data.paged;
                     $('.events-list').append(data.html);
+
+                    if (!data.is_show_button) {
+                        $('.load-more').remove();
+                    }
                 }
             }
         });

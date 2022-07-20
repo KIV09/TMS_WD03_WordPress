@@ -275,7 +275,7 @@ add_action( 'wp_ajax_show_more', 'blog_load_posts' );
 add_action( 'wp_ajax_nopriv_show_more', 'blog_load_posts' );
 function blog_load_posts() {
 	$args          = json_decode( stripslashes( $_POST['query'] ), true );
-	$args['paged'] = $_POST['page'] ++;
+	$args['paged'] = ++$_POST['page'];
 
 	$html = '';
 
@@ -300,3 +300,34 @@ function blog_load_posts() {
 	echo json_encode( [ 'html' => $html, 'is_show_button' => $is_show_button, 'paged' => $args['paged'] ] );
 	die();
 }
+
+/**
+ * Hide shipping rates when free shipping is available, but keep "Local pickup"
+ * Updated to support WooCommerce 2.6 Shipping Zones
+ */
+
+function hide_shipping_when_free_is_available( $rates, $package ) {
+	$new_rates = array();
+	foreach ( $rates as $rate_id => $rate ) {
+		// Only modify rates if free_shipping is present.
+		if ( 'free_shipping' === $rate->method_id ) {
+			$new_rates[ $rate_id ] = $rate;
+			break;
+		}
+	}
+
+	if ( ! empty( $new_rates ) ) {
+		//Save local pickup if it's present.
+		foreach ( $rates as $rate_id => $rate ) {
+			if ('local_pickup' === $rate->method_id ) {
+				$new_rates[ $rate_id ] = $rate;
+				break;
+			}
+		}
+		return $new_rates;
+	}
+
+	return $rates;
+}
+
+add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2 );
