@@ -162,3 +162,54 @@ function addOptionsPage() {
         ] );
     }
 }
+
+add_action( 'init', 'register_post_types' );
+function register_post_types(){
+    register_post_type( 'portfolio', [
+        'label'  => null,
+        'labels' => [
+            'name'               => 'Портфолио',
+            'singular_name'      => 'Портфолио',
+            'add_new'            => 'Добавить Портфолио',
+            'add_new_item'       => 'Добавление Портфолио',
+            'edit_item'          => 'Редактирование Портфолио',
+            'new_item'           => 'Новое Портфолио',
+            'view_item'          => 'Смотреть Портфолио',
+            'search_items'       => 'Искать Портфолио',
+            'not_found'          => 'Не найдено',
+            'not_found_in_trash' => 'Не найдено в корзине',
+            'parent_item_colon'  => '',
+            'menu_name'          => 'Портфолио',
+        ],
+        'public'              => true,
+        'show_in_rest'        => true,
+        'menu_position'       => 5,
+        'menu_icon'           => 'dashicons-calendar-alt',
+        'capability_type'     => 'post',
+        'supports'            => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
+        'taxonomies'          => [],
+        'has_archive'         => true,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ] );
+
+    register_taxonomy( 'portfolio_category', [ 'portfolio' ], [
+        'label'                 => '',
+        'labels'                => [
+            'name'              => 'Категории Портфолио',
+            'singular_name'     => 'Категория Портфолио',
+            'search_items'      => 'Искать категорию',
+            'view_item '        => 'Смотреть категорию',
+            'edit_item'         => 'Редактировать Портфолио',
+            'update_item'       => 'Обновить категорию',
+            'add_new_item'      => 'Добавить новую категорию',
+            'new_item_name'     => 'Новая категория',
+            'menu_name'         => 'Категории Портфолио',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true,
+        'rewrite'               => true,
+        'show_in_rest'          => true,
+    ] );
+}

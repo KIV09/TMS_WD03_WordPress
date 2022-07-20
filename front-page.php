@@ -103,21 +103,34 @@
         </div>
 
         <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-halves">
+            <?php $posts_portfolio = get_posts([
+                'numberposts' => 4,
+                'post_type'   => 'portfolio',
+                'orderby' => 'rand',
 
+            ]); ?>
+            <?php foreach ($posts_portfolio
+
+            as $post_portfolio): ?>
+            <?php setup_postdata($post_portfolio); ?>
             <div class="columns portfolio-item">
                 <div class="item-wrap">
-                    <a href="<?= get_template_directory_uri(); ?>/portfolio.html">
-                        <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/geometrics.jpg">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if (has_post_thumbnail()): ?>
+                            <?php the_post_thumbnail(''); ?>
+                        <?php endif; ?>
                         <div class="overlay"></div>
                         <div class="link-icon"><i class="fa fa-link"></i></div>
                     </a>
                     <div class="portfolio-item-meta">
-                        <h5><a href="<?= get_template_directory_uri(); ?>/portfolio.html">Geometrics</a></h5>
-                        <p>Illustration</p>
+                        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                        <p><?php the_excerpt(); ?></p>
                     </div>
                 </div>
             </div>
-
+            <?php endforeach; ?>
+            <?php wp_reset_postdata(); ?>
+            <!--
             <div class="columns portfolio-item">
                 <div class="item-wrap">
                     <a href="<?= get_template_directory_uri(); ?>/portfolio.html">
@@ -160,6 +173,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
         </div>
 
