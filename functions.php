@@ -184,3 +184,55 @@ function acfDoShortcode($value)
 {
     return !is_array($value) ? do_shortcode($value) : $value;
 }
+
+add_action('init', 'register_post_types');
+function register_post_types()
+{
+    register_post_type('portfolio', [
+        'label' => null,
+        'labels' => [
+            'name' => 'Портфолио',
+            'singular_name' => 'Портфолио',
+            'add_new' => 'Добавить портфолио',
+            'add_new_item' => 'Добавление портфолио',
+            'edit_item' => 'Редактирование портфолио',
+            'new_item' => 'Новое портфолио',
+            'view_item' => 'Смотреть портфолио',
+            'search_items' => 'Искать портфолио',
+            'not_found' => 'Не найдено',
+            'not_found_in_trash' => 'Не найдено в корзине',
+            'parent_item_colon' => '',
+            'menu_name' => 'Портфолио',
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-calendar-alt',
+        'capability_type' => 'post',
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+        'taxonomies' => [],
+        'has_archive' => true,
+        'rewrite' => true,
+        'query_var' => true,
+    ]);
+
+    register_taxonomy( 'portfolio_category', [ 'portfolio' ], [
+        'label'                 => '',
+        'labels'                => [
+            'name'              => 'Категории портфолио',
+            'singular_name'     => 'Категория портфолио',
+            'search_items'      => 'Искать категорию',
+            'view_item '        => 'Смотреть категорию',
+            'edit_item'         => 'Редактировать портфолио',
+            'update_item'       => 'Обновить категорию',
+            'add_new_item'      => 'Добавить новую категорию',
+            'new_item_name'     => 'Новая категория',
+            'menu_name'         => 'Категории портфолио',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true,
+        'rewrite'               => true,
+        'show_in_rest'          => true,
+    ] );
+}

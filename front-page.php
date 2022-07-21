@@ -90,66 +90,29 @@
             </div>
 
             <div id="portfolio-wrapper" class="bgrid-quarters s-bgrid-halves">
-
+            <?php $portfolio_rand = new WP_Query(array('post_type'=>'portfolio', 'post_status'=>'publish', 'posts_per_page'=>4, 'order_by'=>'rand')); ?>
+                <?php if ($portfolio_rand -> have_posts()): ?>
+             <?php while ($portfolio_rand -> have_posts()): ?>
+            <?php $portfolio_rand -> the_post(); ?>
                 <div class="columns portfolio-item">
                     <div class="item-wrap">
-                        <a href="portfolio.html">
-                            <img alt=""
-                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/geometrics.jpg">
+                        <a href="<?php the_permalink(); ?>">
+                            <?php if (has_post_thumbnail()): ?>
+                                <?php the_post_thumbnail('post-thumbnail'); ?>
+                            <?php endif; ?>
                             <div class="overlay"></div>
                             <div class="link-icon"><i class="fa fa-link"></i></div>
                         </a>
                         <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.html">Geometrics</a></h5>
-                            <p>Illustration</p>
+                            <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                            <p><?php the_excerpt(); ?></p>
                         </div>
                     </div>
                 </div>
-
-                <div class="columns portfolio-item">
-                    <div class="item-wrap">
-                        <a href="portfolio.html">
-                            <img alt="" src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/console.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.html">Console</a></h5>
-                            <p>Web Development</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="columns portfolio-item s-first">
-                    <div class="item-wrap">
-                        <a href="portfolio.html">
-                            <img alt=""
-                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/camera-man.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.html">Camera Man</a></h5>
-                            <p>Photography</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="columns portfolio-item">
-                    <div class="item-wrap">
-                        <a href="portfolio.html">
-                            <img alt=""
-                                 src="<?= get_template_directory_uri(); ?>/assets/images/portfolio/into-the-light.jpg">
-                            <div class="overlay"></div>
-                            <div class="link-icon"><i class="fa fa-link"></i></div>
-                        </a>
-                        <div class="portfolio-item-meta">
-                            <h5><a href="portfolio.html">Into The Light</a></h5>
-                            <p>Branding</p>
-                        </div>
-                    </div>
-                </div>
-
+                <?php endwhile; ?>
+            <?php else:?>
+                Портфолио нет!
+            <?php endif; ?>
             </div>
 
         </div>
