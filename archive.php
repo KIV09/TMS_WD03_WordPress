@@ -24,16 +24,16 @@
 
                                 <div class="entry__meta">
                                     <ul>
-                                        <li><?php the_time('d.m.Y'); ?></li>
-										<?php
-										$categories = get_the_category();
-										?>
-										<?php foreach ( $categories as $category ): ?>
-                                            <li>
-                                                <a href="<?php echo get_term_link( $category ); ?>">
-													<?php echo $category->name; ?>
-                                                </a>
-                                            </li>
+                    <li><?php the_time('d.m.Y'); ?></li>
+                    <?php
+    $categories = get_the_terms(get_the_ID(), 'category');
+                    ?>
+                    <?php foreach ( $categories as $category ): ?>
+                        <li>
+                            <a href="<?php echo get_term_link( $category ); ?>">
+                                <?php echo $category->name; ?>
+                            </a>
+                        </li>
 										<?php endforeach; ?>
 
                                         <li><?php the_author(); ?></li>

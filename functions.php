@@ -7,6 +7,10 @@ function theme_setup() {
     add_theme_support('title-tag');
 	add_theme_support('post-thumbnails');
 
+    if (is_plugin_active('woocommerce/woocommerce.php')) {
+	    add_theme_support( 'woocommerce' );
+    }
+
 	add_image_size('article_image', 500, 300, ['left', 'top']);
 
 	register_nav_menu( 'top', 'Главное меню' );
@@ -97,6 +101,14 @@ function registerWidgetsArea() {
 	register_sidebar([
 		'name' => 'Контакты',
 		'id' => 'contact-sidebar',
+		'before_widget' => '<div class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="h6">',
+		'after_title' => '</h3>',
+	]);
+	register_sidebar([
+		'name' => 'Магазин',
+		'id' => 'shop-sidebar',
 		'before_widget' => '<div class="widget %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h3 class="h6">',
@@ -331,3 +343,9 @@ function hide_shipping_when_free_is_available( $rates, $package ) {
 }
 
 add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2 );
+
+add_filter('woocommerce_enqueue_styles', 'reinit_woocommerce_styles');
+function reinit_woocommerce_styles($styles) {
+    unset($styles['woocommerce-layout']);
+    return $styles;
+}

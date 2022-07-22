@@ -59,7 +59,6 @@ Template Name: Главная страница
 				);
 				?>
 
-
 				<?php foreach ( $posts as $post ): ?>
 					<?php setup_postdata( $post ); ?>
 

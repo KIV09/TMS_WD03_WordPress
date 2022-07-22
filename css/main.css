@@ -2605,3 +2605,17 @@ button::-moz-focus-inner, input::-moz-focus-inner {
         border-left: none;
     }
 }
+
+.product.column {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.product.column .button {
+    display: block;
+    text-align: center;
+}
+
+.woocommerce .quantity .qty {
+    width: auto;
+}
