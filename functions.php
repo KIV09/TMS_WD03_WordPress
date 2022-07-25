@@ -4,6 +4,12 @@ add_action('after_setup_theme', 'theme_setup');
 function theme_setup()
 {
     add_theme_support('post-thumbnails');
+    add_theme_support('title-tag');
+
+    if(is_plugin_active('woocommerce/woocommerce.php')){
+        add_theme_support('woocommerce');
+    }
+
     add_image_size('article_image', width: 500, height: 500, crop: 300);
 
     register_nav_menu('top', 'Главное меню');
@@ -235,4 +241,10 @@ function register_post_types()
         'rewrite'               => true,
         'show_in_rest'          => true,
     ] );
+}
+
+add_filter('woocommerce_enqueue_styles', 'reinit_woocommerce_styles');
+function reinit_woocommerce_styles($styles){
+    unset($styles['woocommerce-layout']);
+    return $styles;
 }

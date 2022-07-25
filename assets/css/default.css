@@ -1227,6 +1227,15 @@ properly.
     text-align: center !important;
 }
 
+.row .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
+
+.woocommerce .quantity .qty{
+    width: auto;
+}
 
 

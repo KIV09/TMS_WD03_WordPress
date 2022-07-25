@@ -36,7 +36,12 @@
                                 </a>
                                 <div class="portfolio-item-meta">
                                     <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-                                    <p><?php the_excerpt(); ?></p>
+                                    <?php $taxonomies = get_the_terms(get_the_ID(), 'portfolio_category') ?>
+                                    <?php foreach ($taxonomies as $taxonomy): ?>
+                                        <li>
+                                            <a href="<?= get_term_link($taxonomy); ?>"><?= $taxonomy->name; ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
