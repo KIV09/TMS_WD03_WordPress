@@ -74,6 +74,8 @@ function scriptEnqueued() {
 			'ajaxurl' => admin_url('admin-ajax.php'),
 			'query_vars' => json_encode($wp_query->query_vars),
 			'current_page' => get_query_var('paged') ? get_query_var('paged') : 1,
+            'per_page' => get_query_var('posts_per_page'),
+            'category' => get_query_var('cat') ?? 0
 		)
 	);
 	wp_enqueue_script( 'new_theme-load_more', get_template_directory_uri() . '/js/load_more.js', ['new_theme-main'] );
@@ -248,7 +250,7 @@ function register_post_types(){
 			'not_found'          => 'Не найдено',
 			'not_found_in_trash' => 'Не найдено в корзине',
 			'parent_item_colon'  => '',
-			'menu_name'          => 'События',
+			'menu_name'          => __('События', 'new-theme'),
 		],
 		'public'              => true,
 		'show_in_rest'        => true,
@@ -348,4 +350,27 @@ add_filter('woocommerce_enqueue_styles', 'reinit_woocommerce_styles');
 function reinit_woocommerce_styles($styles) {
     unset($styles['woocommerce-layout']);
     return $styles;
+}
+
+add_action('rest_api_init', 'registerEndpointForPosts');
+function registerEndpointForPosts() {
+    $namespace = 'wp/nt1';
+    $route = 'get_posts';
+    $args = [
+        'method' => 'GET',
+        'callback' => 'restGetPosts',
+        'args' => [
+            'page' => ['validation_callback' => function($param) {
+                return is_int($param);
+            }],
+            'per_page' => ['validation_callback' => function($param) {
+                return is_int($param);
+            }],
+            'categories' => ['validation_callback' => function($param) {
+                return is_array($param);
+            }],
+        ]
+    ];
+
+    register_rest_route($namespace, $route, $args);
 }

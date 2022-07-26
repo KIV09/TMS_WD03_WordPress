@@ -8,6 +8,7 @@
 
 				<?php if ( have_posts() ): ?>
 
+                    <div class="posts-list">
 					<?php while ( have_posts() ): ?>
 						<?php the_post(); ?>
 
@@ -49,6 +50,7 @@
                         </article> <!-- end entry -->
 
 					<?php endwhile; ?>
+                    </div>
 
                     <!-- page nav -->
 					<?php the_posts_pagination(); ?>

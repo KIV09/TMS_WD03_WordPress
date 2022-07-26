@@ -65,6 +65,6 @@
 
     </nav> <!-- end #nav-wrap -->
 
-    <a class="header-menu-toggle" href="<?= get_template_directory_uri(); ?>/#0" title="Menu"><span>Menu</span></a>
+    <a class="header-menu-toggle" href="<?= get_template_directory_uri(); ?>/#0" title="Menu"><span><?php echo __('Menu', 'new-theme'); ?></span></a>
 
 </header> <!-- Header End -->
