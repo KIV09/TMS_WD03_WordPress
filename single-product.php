@@ -1,3 +1,9 @@
+<?php
+/*
+Template Name: Single Product Template
+*/
+?>
+
 <?php get_header(); ?>
 <?php the_post(); ?>
     <div class="content-outer">
@@ -46,11 +52,6 @@
                             <div class="gravatar">
                                 <?= get_avatar(get_the_author()); ?>
                             </div>
-                            <div class="about">
-                                <h5><a title="Posts by Author" href="#" rel="author"><?php the_author(); ?></a></h5>
-                                <p><?= get_the_author_meta("description"); ?></p>
-                            </div>
-
                         </div>
 
                         <ul class="post-nav cf">
@@ -68,19 +69,9 @@
 
                 </article>
                 <?php wp_reset_postdata(); ?>
-
-
-<?php comments_template(); ?>
-
             </div>
 
             <div id="secondary" class="four columns end">
-
-              <aside id="sidebar">
-
-                <?php get_sidebar("right-sidebar")?>
-
-               </aside>
 
             </div>
 
