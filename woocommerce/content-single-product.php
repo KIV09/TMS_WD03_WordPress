@@ -31,7 +31,7 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'row twelve', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'eight', $product ); ?>>
 
 	<?php
 	/**

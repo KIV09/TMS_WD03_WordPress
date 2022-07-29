@@ -33,7 +33,6 @@ $wrapper_classes   = apply_filters(
 		'woocommerce-product-gallery--' . ( $post_thumbnail_id ? 'with-images' : 'without-images' ),
 		'woocommerce-product-gallery--columns-' . absint( $columns ),
 		'images',
-        'column'
 	)
 );
 ?>
