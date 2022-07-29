@@ -300,7 +300,7 @@ function blog_load_posts() {
 
 			ob_start();
 			get_template_part( 'event_item' );
-			$html = ob_get_clean();
+			$html .= ob_get_clean();
 		}
 
 		$q->reset_postdata();
@@ -373,4 +373,55 @@ function registerEndpointForPosts() {
     ];
 
     register_rest_route($namespace, $route, $args);
+}
+
+function restGetPosts($request) {
+    $params = $request->get_params();
+
+    $posts = get_posts([
+        'paged' => $params['page'],
+        'posts_per_page' => $params['per_page'],
+        'category' => $params['categories']
+    ]);
+
+    foreach ($posts as $item) {
+        global $post;
+        $post = $item;
+        setup_postdata($post);
+
+	    ob_start();
+	    get_template_part( 'post-item' );
+	    $html .= ob_get_clean();
+    }
+    wp_reset_postdata();
+
+    return new WP_REST_Response(['html' => $html ?? ''], 200);
+}
+
+add_filter('cron_schedules', 'registerTimeInterval');
+function registerTimeInterval($schedule) {
+    $schedule['one_and_half_min'] = [
+        'interval' => 60 * 1.5,
+        'display' => __('Раз в 1,5 минуты', 'new-theme')
+    ];
+
+    return $schedule;
+}
+
+add_action('wp', 'addScheduleTask');
+function addScheduleTask() {
+    if (!wp_next_scheduled('create_new_post_by_cron')) {
+        wp_schedule_event(time(), 'one_and_half_min', 'create_new_post_by_cron');
+    }
+}
+
+add_action('create_new_post_by_cron', 'createNewPostByCron');
+function createNewPostByCron() {
+    wp_insert_post([
+        'post_type' => 'post',
+        'post_title' => 'Запись по крону ' . date('H:i:s'),
+        'post_content' => 'Запись была автоматически по крону в ' . date('H:i:s'),
+        'post_status' => 'publish',
+        'post_category' => [1]
+    ]);
 }
